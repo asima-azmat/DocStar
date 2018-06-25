@@ -2,10 +2,12 @@
 /** */
 import axios from 'axios'
 //const url = "http://localhost:5000/api/"
-const url = process.env.NODE_ENV === 'production' ? "/api/" : "http://localhost:5000/api/"
+//const url = "http://localhost:5000/api/"
+const url = process.env.NODE_ENV === 'production' ? "/api/" : "http://localhost:3000/"
+
 export function loadArticles () {
     return (dispatch) => {
-        axios.get(`${url}articles`)
+        axios.get(`${url}blog`)
         .then((res) => {
             let articles = res.data
             dispatch({type:'LOAD_ARTICLES', articles})
@@ -14,6 +16,9 @@ export function loadArticles () {
         })
     }
 }
+
+
+
 export function getUser (_id) {
     return axios.get(`${url}user/${_id}`).then((res)=>{
         return res.data
