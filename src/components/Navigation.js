@@ -64,7 +64,7 @@ class Navigation extends React.Component {
 
             <NavItem path="/" name="Home" />
             <NavItem path="/page2" name="About Us" />
-            <NavItem path="/page2" name="Find Doctors" />
+            <NavItem path="/page2" name="hy Doctors" />
             <NavItem path="/page2" name="Book Appointment" />
             <NavItem path="/page2" name="Rate Doctors" />
             <NavItem path="/page2" name="Our Blog" />
