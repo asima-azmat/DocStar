@@ -34,7 +34,7 @@ export function getUserProfile (_id) {
 }
 export function getArticle (article_id) {
     return (dispatch) => {
-        axios.get(`${url}article/${article_id}`)
+        axios.get(`${url}blog/${article_id}`)
         .then((res) => {
             let article = res.data
             dispatch({type: 'VIEW_ARTICLE', article})
@@ -62,6 +62,8 @@ export function follow (id, user_id) {
         }).catch((err)=>console.log(err))        
     }
 }
+
+
 export function SignInUser (user_data) {
     return (dispatch) => {
         axios.post(`${url}user`,user_data).then((res)=>{

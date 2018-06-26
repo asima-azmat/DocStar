@@ -4,7 +4,7 @@ class AsideFeed extends Component {
     render () {
         const authors = this.props._articles
             .map((_article)=> {
-                    return _article.blogText
+                    return _article.c
                 }
             )
             .sort()
@@ -21,11 +21,11 @@ class AsideFeed extends Component {
                             <span className="count-button">{i}</span>
                         </div>
                         <div className="top-stories-links">
-                            <a className="post-title" href={`/articleview/${_article.blogText}`}>{_article.blogText}</a><br/>
+                            <a className="post-title" href={`/articleview/${_article.comments}`}>{_article.comments}</a><br/>
                             <small>
                               <div data-react-className="PopoverLink" data-react-props="">
                                 <span className="popover-link" data-reactroot="">
-                                    <a href={`/profile/${_article.blogText}`}>{_article.blogText}</a>
+                                    <a href={`/profile/${_article.comments}`}>{_article.comments}</a>
                                 </span>
                               </div>
                             </small>

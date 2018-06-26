@@ -6,14 +6,50 @@ import {
     follow
 } from './../redux/actions/actions'
 import PropTypes from 'prop-types'
+import AsideFeed from './AsideFeed'
 import FollowButton from './FollowButton'
+import AddCommentButton from './AddCommentButton'
+import Editor from './Editor'
+
 const mapStateToProps = state => {
     return {
         _article: state.articles.article,
         user: state.authUser.user    
     }
 }
+
+
+class Popup extends React.Component {
+  render() {
+    return (
+      <div className='popup'>
+        <div className='popup_inner'>
+          <h1>{this.props.text}</h1>
+        <button onClick={this.props.closePopup}>close me</button>
+        </div>
+      </div>
+    );
+  }
+}
+
+
+
 class ArticleView extends Component {
+
+    constructor() {
+    super();
+    this.state = {
+      showPopup: false
+    };
+  }
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  }
+
+
+
     componentDidMount() {
         document.body.className = 'posts show'
     }
@@ -24,14 +60,35 @@ class ArticleView extends Component {
         document.body.className = ''
     }
     render() {
-        const { text, claps, title, feature_img, author } = this.props._article
+                    console.log(this.props._article);
+
+        const { text, _id, blogText, feature_img, doctorId ,comments} = this.props._article
+
+
+
         let author_name, author_img, author_id
-        if (author) {
-            const { name, provider_pic, _id } = author
-            author_name = name
-            author_id = _id
-            author_img = provider_pic
+        if (doctorId) {
+            const { firstName, lastName, _id } = doctorId
+            author_name = firstName
+            author_id = lastName
+            author_img = _id
         }
+
+
+const Test = ({comments = []}) => (
+  <div>
+    {comments.map(station => (
+      <div className="comments" key={station.commentText}>{station.commentText}</div>
+    ))}
+  </div>
+); 
+
+
+
+
+
+
+
         return ( 
                 <div>
                 <div className="container-fluid main-container">
@@ -51,7 +108,7 @@ class ArticleView extends Component {
                         {!feature_img || !feature_img.length > 0 ? '' : <div className="post-picture-wrapper">
                             <img src={feature_img} alt="feature img 540" />
                         </div> }
-                        <h3 className="title">{title}</h3>
+                        <h3 className="blogText">{author_name}</h3>
                         <div className="body">
                             <p></p>
                             <p className=""dangerouslySetInnerHTML={{__html: text}}>
@@ -68,7 +125,7 @@ class ArticleView extends Component {
                                     <button onClick={() => this.props.clap(this.props._article._id)} className="like-button" data-behavior="trigger-overlay" type="submit">
                                     <i className="fa fa-heart-o"></i><span className="hide-text">Like</span>
                                     </button>
-                                     <span className="like-count">{claps}</span>
+                                     <span className="like-count">{_id}</span>
                                 </div>
                             </div>
                             <div className="pull-left">
@@ -84,18 +141,19 @@ class ArticleView extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="author-info">
-                            <div clas="author-metadata">
-                                <img alt={author_name} className="avatar-image" src={author_img} height="50" width="50" />
-                                <div className="username-description">
-                                    <h4>{author_name}</h4>
+                        <div className="author-isnfo">
+                            <div clas="author-metasdata">
+                                <div className="usernasme-description">
+                                    <h4>{blogText}</h4>
                                     <p></p>
                                 </div>
                             </div>
-                            {this.props.user ? <FollowButton user={`${this.props.user.following}`} to_follow={`${author_id}`} /> : ''}
                         </div>
                     </div>
                 </div>
+                <div>
+    
+
                 <div className="post-show-footer row animated fadeInUp" data-animation="fadeInUp-fadeOutDown">
                     <div className="col-xs-10 col-md-6 col-xs-offset-1 col-md-offset-3 main-content related-stories">
                         <h4 className="small-heading">Related stories</h4>
@@ -113,8 +171,8 @@ class ArticleView extends Component {
                     </div>
                     <div id="responses" className="col-xs-10 col-md-6 col-xs-offset-1 col-md-offset-3 main-content">
                         <h4 className="small-heading">Responses</h4>
-                        <div data-behavior="responses-list">
-                        </div>
+                        <Test comments={comments} />
+  </div>
                     </div>
                 </div>
                 <div className="post-metadata-bar" data-page="post-metadata-bar">
@@ -143,9 +201,24 @@ class ArticleView extends Component {
                                 <img alt={author_name} className="avatar-image" src={author_img} height="35" width="35" />
                                 <div data-react-className="PopoverLink" ><span className="popover-link" data-reactroot=""><a href={`/profile/${author_img}`}>{author_name}</a></span></div>
                             </div>
-                            <div data-react-className="UserFollowButton" >
-                                {this.props.user ? <FollowButton user={`${this.props.user.following}`} to_follow={`${author_id}`} /> : ''}
-                            </div>
+
+                            <div className="container-fluid main-container">
+                    <div className="col-md-6 col-md-offset-1 dashboard-main-content">
+                        <div className="posts-wrapper animated fadeInUp" data-behavior="endless-scroll" data-animation="fadeInUp-fadeOutDown">
+                                         
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                              <button onClick={this.togglePopup.bind(this)}>Add Comment</button>
+{this.state.showPopup ? 
+          <Editor>
+                    </Editor>      
+          : null
+        }
                         </div>
                     </div>
                 </div>
