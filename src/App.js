@@ -29,7 +29,6 @@ class App extends Component {
         return ( 
             <div>
             { !pathname.includes('editor') ? <Header /> : '' }
-            <SignInWith />
                 <Switch>
                 
                     <Route exact path="/" component={Feed} />

@@ -12,12 +12,12 @@ class SignInWith extends Component {
     render() {
     const responseGoogle = (res) => {
         let postData = {
-            name: res.w3.ig,
+            //name: res.w3.ig,
             provider: 'google',
-            email: res.w3.U3,
-            provider_id: res.El,
-            token: res.Zi.access_token,
-            provider_pic: res.w3.Paa
+            //email: res.w3.U3,
+            //provider_id: res.El,
+            //token: res.Zi.access_token,
+            //provider_pic: res.w3.Paa
         }
         console.log(postData)
         // build our user data
