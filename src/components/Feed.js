@@ -5,6 +5,7 @@ import {
 } from './../redux/actions/actions'
 import AsideFeed from './AsideFeed'
 
+
 const mapStateToProps = state => {
     return {
         articles: state.articles.articles
@@ -14,7 +15,6 @@ const mapStateToProps = state => {
 class Feed extends Component {
 
     componentWillReceiveProps(nextProps) {
-        
     }
         
     componentWillMount() {
@@ -27,6 +27,8 @@ class Feed extends Component {
 
                 <div className="post-panel">
                     <div className="main-body">
+                     <div className="pull-right">
+                        </div>
                         <h3 className="post-title"><a href={`/articleview/${article._id}`} >{article.title}</a></h3>
                         <div className="post-body">
                             <p className="" dangerouslySetInnerHTML={{__html: article.blogText}}></p>
@@ -59,15 +61,7 @@ class Feed extends Component {
 
         return ( 
             <div>
-                <div className="container-fluid main-container">
-                    <div className="col-md-6 col-md-offset-1 dashboard-main-content">
-                        <div className="posts-wrapper animated fadeInUp" data-behavior="endless-scroll" data-animation="fadeInUp-fadeOutDown">
-
-                            {articles}
-                        </div>
-                    </div>
-                    {this.props.articles ? <AsideFeed _articles={this.props.articles} /> : ''}
-                </div>
+                
 
             </div>
         );
