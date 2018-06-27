@@ -4,7 +4,7 @@ import {
     loadArticles
 } from './../redux/actions/actions'
 import AsideFeed from './AsideFeed'
-import {Badge} from 'react-materialize'
+import {Badge,Button} from 'react-materialize'
 
 const mapStateToProps = state => {
     return {

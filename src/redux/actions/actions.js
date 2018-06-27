@@ -17,7 +17,17 @@ export function loadArticles () {
     }
 }
 
-
+export function insertComment(commentText,blogId)
+{
+    axios.post(`${url}blog/doComment`,{
+        commentText : commentText,
+        blogId : blogId
+    }).then(function(response){
+        console.log(response);
+    }).catch(function(error){
+        console.log(error);
+    });
+}
 
 export function getUser (_id) {
     return axios.get(`${url}user/${_id}`).then((res)=>{

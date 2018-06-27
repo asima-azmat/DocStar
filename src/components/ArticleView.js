@@ -3,14 +3,13 @@ import { connect } from 'react-redux'
 import { 
     getArticle, 
     clap,
-    follow
+    follow,
+    insertComment
 } from './../redux/actions/actions'
-import {Badge} from 'react-materialize'
-import {Panel,Label} from 'react-bootstrap'
+import {Badge,Chip} from 'react-materialize'
+import {Panel,Label,Button,ButtonToolbar} from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import FollowButton from './FollowButton'
-import AddCommentButton from './AddCommentButton'
-import Editor from './Editor'
+import axios from "axios/index";
 
 const mapStateToProps = state => {
     return {
@@ -40,16 +39,7 @@ class ArticleView extends Component
     constructor(props)
     {
         super(props);
-        this.state = {
-          showPopup: false
-        };
-    }
-
-    togglePopup()
-    {
-        this.setState({
-          showPopup: !this.state.showPopup
-        });
+        this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
     }
 
 
@@ -79,6 +69,21 @@ class ArticleView extends Component
     static giveName(person)
     {
         return person.firstName + ' ' + person.lastName
+    }
+
+    handleCommentSubmit(event)
+    {
+        /*const url = process.env.NODE_ENV === 'production' ? "/api/" : "http://localhost:3000/";
+        axios.post(`${url}blog/doComment`,{
+            commentText : event.target.commentText.value,
+            blogId : this.props.match.params.id
+        }).then(function(response){
+            alert('Successfull ' + response);
+        }).catch(function(error){
+            alert('Failed ' + error);
+        });*/
+        this.props.insertComment(event.target.commentText.value,this.props.match.params.id)
+        event.preventDefault();
     }
 
     render()
@@ -145,7 +150,7 @@ class ArticleView extends Component
                     <div>
                         <div className="post-show-footer row animated fadeInUp" data-animation="fadeInUp-fadeOutDown">
                             <div id="responses" className="col-xs-10 col-md-6 col-xs-offset-1 col-md-offset-3 main-content">
-                                <h4 className="medium-heading"><Badge>{ArticleView.getCommentCount(comments)}</Badge> Responses</h4>
+                                <h4 className="medium-heading"><Badge>{ArticleView.getCommentCount(comments)}</Badge> Comments</h4>
                                 <CommentsVar comments={comments}></CommentsVar>
                             </div>
                             {/*<div className="col-xs-10 col-md-6 col-xs-offset-1 col-md-offset-3 main-content related-stories">
@@ -164,9 +169,18 @@ class ArticleView extends Component
                             </div>*/}
                         </div>
                     </div>
-                    {/*<div className="post-metadata-bar" data-page="post-metadata-bar">
+                    <div className="post-metadata-bar" data-page="post-metadata-bar">
                         <div className="flex-container is-inView" data-behavior="animated-metadata">
-                            <div className="post-stats flex-container">
+                            <div className="post-metadata">
+                                <div className="post-info">
+                                    <div className="pull-right">{author_name}</div>
+                                </div>
+                            </div>
+                            <form onSubmit={this.handleCommentSubmit}>
+                                <textarea class="pull-left" id="commentText" type="text"/>&nbsp;
+                                <Button bsStyle="primary" bsSize="xsmall" type="submit">Add Comment</Button>
+                            </form>
+                           {/* <div className="post-stats flex-container">
                                 <div className="like-button-wrapper">
                                     <form className="button_to" method="get" action=""><button className="like-button" data-behavior="trigger-overlay" type="submit">      <i className="fa fa-heart-o"></i><span className="hide-text">Like</span></button>
                                     </form> <span className="like-count">0</span>
@@ -197,9 +211,9 @@ class ArticleView extends Component
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*/}
                         </div>
-                    </div>*/}
+                    </div>
                 </div>
             </div>
         );
