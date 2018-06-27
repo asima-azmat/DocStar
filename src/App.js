@@ -30,11 +30,8 @@ class App extends Component {
             <div>
             { !pathname.includes('editor') ? <Header /> : '' }
                 <Switch>
-                
                     <Route exact path="/" component={Feed} />
-                                <Route exact path="/" component={App} />
-            <Route exact path="/login" component={Login} />
-
+                    <Route exact path="/login" component={Login} />
                     <Route path="/profile/:id" component={Profile} />
                     <Route path="/articleview/:id" component={ArticleView} />
                     <Route path="**" component={Feed} />

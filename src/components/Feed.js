@@ -4,6 +4,7 @@ import {
     loadArticles
 } from './../redux/actions/actions'
 import AsideFeed from './AsideFeed'
+import {Badge} from 'react-materialize'
 
 const mapStateToProps = state => {
     return {
@@ -20,39 +21,39 @@ class Feed extends Component {
     componentWillMount() {
         this.props.loadArticles()
     }
-    
-    render() {
-    const articles = this.props.articles.reverse().map((article)=>
-                
 
+    giveDoctorName(doctor)
+    {
+        return <a className="read-more" href={`/doctor/${doctor._id}`}>{doctor.firstName + ' ' + doctor.lastName}</a>
+    }
+
+    getCreatedDate(date)
+    {
+        date = new Date(date);
+        return date.toDateString();
+    }
+
+    getNumberOfComments(comments)
+    {
+        return comments.length;
+    }
+    
+    render()
+    {
+        const articles = this.props.articles.reverse().map((article)=>
                 <div className="post-panel">
                     <div className="main-body">
-                        <h3 className="post-title"><a href={`/articleview/${article._id}`} >{article.title}</a></h3>
+                        <h3 className="post-title"><a href={`/articleview/${article._id}`}>{article.blogHeading}</a></h3>
                         <div className="post-body">
-                            <p className="" dangerouslySetInnerHTML={{__html: article.blogText}}></p>
+                            <p className="" dangerouslySetInnerHTML={{__html: article.blogText.substr(0,100)+'...'}}></p>
                         </div>
+                        <div className="response-count pull-right">Comments: <Badge>{this.getNumberOfComments(article.comments)}</Badge></div>
                         <a className="read-more" href={`/articleview/${article._id}`}>Read more</a>
                     </div>
 
                     <div className="post-stats clearfix">
-                        <div className="pull-left">
-                            <div className="like-button-wrapper">
-                                <form className="button_to" method="get" action="">
-                                    <button className="like-button" data-behavior="trigger-overlay" type="submit"><i className="fa fa-heart-o"></i><span className="hide-text">Like</span></button></form>
-                                <span className="like-count">{article.claps}</span>
-                            </div>
-
-                        </div>
-
-                        <div className="pull-right">
-                            <div className="bookmark-button-wrapper">
-                                <form className="button_to" method="get" action=""><button className="bookmark-button" data-behavior="trigger-overlay" type="submit">      <span className="icon-bookmark-o"></span><span className="hide-text">Bookmark</span></button></form>
-                            </div>
-
-                        </div>
-
-                        <div className="response-count pull-right">
-                        </div>
+                        <div className="response-count pull-right">Created On: {this.getCreatedDate(article.createdAt)}</div>
+                        <div className="pull-left">By: {this.giveDoctorName(article.doctorId)}</div>
                     </div>
                 </div>
             )
@@ -62,13 +63,11 @@ class Feed extends Component {
                 <div className="container-fluid main-container">
                     <div className="col-md-6 col-md-offset-1 dashboard-main-content">
                         <div className="posts-wrapper animated fadeInUp" data-behavior="endless-scroll" data-animation="fadeInUp-fadeOutDown">
-
                             {articles}
                         </div>
                     </div>
                     {this.props.articles ? <AsideFeed _articles={this.props.articles} /> : ''}
                 </div>
-
             </div>
         );
     }
