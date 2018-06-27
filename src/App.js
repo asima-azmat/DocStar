@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import { Switch, Route } from 'react-router-dom'
 import Login from './components/Login';
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import Feed from './components/Feed'
 import Profile from './components/Profile'

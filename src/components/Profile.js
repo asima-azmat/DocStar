@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Doctor from './Ryan-Aaron.jpg'
+
 import FollowButton from './FollowButton'
 import { 
     getUserProfile, 
@@ -33,96 +35,45 @@ class Profile extends Component {
 
 function ItemList ({items}) {
     return (
-            <div className="users show">
-            <div className="container-fluid main-container">
-            <div className="banner-container animated fadeInUp-small" data-animation="fadeInUp-fadeOutDown-slow">
-                <div className="hero-wrapper">
-                    <header className="hero">
-                        <div className="profile-info">
-                            <h1 className="hero-title">Dr. Ryan Aaron</h1>
-                            <p className="hero-description">Orthodontist</p>
-                            <div className="hero-location">
-                                <i className="fa fa-map-marker"></i>Rating
-                            </div>
-                        </div>
-                        <div className="hero-avatar">
-                            <img alt="Picture" className="avatar-image" src="Ryan-Aaron.jpg" height="100" width="100"/>
-                        </div>
-                    </header>
+        <div className="container container-fluid">
+            <div className="row">
+                <div className="col-md-6 col-md-offset-2">
+                    <h2>Doctor's Name</h2>
+                    <h3>Specialty</h3>
+                    <h4>Overall Rating</h4>
+                </div>
+                <div className="col-md-2" style={{marginTop: 3 + 'em'}} >
+                    <img src={Doctor} className="img-responsive" alt="Doctor Profile Picture"></img>
+                </div>
+            </div>
+            <div className="row" >
+                <div className="col-md-8 col-md-offset-2" >
+                    <ul className="nav nav-tabs">
+                        <li className="active"><a data-toggle="tab" href="#rating">Ratings</a></li>
+                        <li><a data-toggle="tab" href="#provide_rating">Provide Rating</a></li>
+                        <li><a data-toggle="tab" href="#book_appointment">Book Appointment</a></li>
+                    </ul>
 
-                    <div>
-                        {/*<div data-react-className="UserFollowContainer" data-react-props="{&quot;followerCount&quot;:6,&quot;followingCount&quot;:2,&quot;following&quot;:false,&quot;followed_id&quot;:396,&quot;hideButton&quot;:false,&quot;username&quot;:&quot;mark&quot;,&quot;overlayTrigger&quot;:true}">
-                            <div data-reactroot="">
-                                <div className="following-metadata"><span className="following-count"><span><span><b>{items.profile.user.following.length}</b> Following</span></span>
-                                    </span><span className="follower-count"><span><span><b>{items.profile.user.followers.length}</b> Followers</span></span>
-                                    </span>
-                                </div>
-                                <div>{items.user.name ? <FollowButton user={`${items.user.following}`} to_follow={`${items.profile.user._id}`} /> : ''}</div>
-                            </div>
-                        </div>*/}
-
+                    <div className="tab-content">
+                        <div id="rating" className="tab-pane fade in active">
+                            <h3>Ratings</h3>
+                            <p>Some content.</p>
+                        </div>
+                        <div id="provide_rating" className="tab-pane fade">
+                            <h3>Provide Ratings</h3>
+                            <p>Some content in menu 1.</p>
+                        </div>
+                        <div id="book_appointment" className="tab-pane fade">
+                            <h3>Book Appointment</h3>
+                            <p>Some content in menu 2.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-
-            <div className="posts-wrapper animated fadeInUp" data-animation="fadeInUp-fadeOutDown">
-
-                {/*<h4 className="small-heading border-top">latest</h4>
-                { items.profile.articles.map((article)=>
-                        <div className="post-panel">
-
-                            <div className="post-metadata">
-                                <img alt="mark" className="avatar-image" src={items.profile.user.provider_pic} height="40" width="40"/>
-                                <div className="post-info">
-                                    <div data-react-className="PopoverLink"><span className="popover-link" data-reactroot=""><a href="javascript:void(0);">{items.profile.user.name}</a></span></div>
-                                    <small>Published • a must read</small>
-                                </div>
-                            </div>
-
-
-                            {article.feature_img.length > 0 ? <div className="post-picture-wrapper">
-                                <img src={article.feature_img} alt="alt"/>
-                            </div> : ''}
-
-                            <div className="main-body">
-                                <h3 className="post-title"><a href={`/articleview/${article._id}`}>{article.title}</a></h3>
-                                <div className="post-body">
-                                    <p className="" dangerouslySetInnerHTML={{__html: article.description}}></p>
-                                </div>
-                                <a className="read-more" href={`/articleview/${article._id}`}>Read more</a>
-                            </div>
-
-                            <div className="post-stats clearfix">
-                                <div className="pull-left">
-                                    <div className="like-button-wrapper">
-                                        <form className="button_to" method="get" action="">
-                                            <button className="like-button" data-behavior="trigger-overlay" type="submit"><i className="fa fa-heart-o"></i><span className="hide-text">Like</span></button>
-                                        </form>
-                                        <span className="like-count">{article.claps}</span>
-                                    </div>
-
-                                </div>
-
-                                <div className="pull-right">
-                                    <div className="bookmark-button-wrapper">
-                                        <form className="button_to" method="get" action=""><button className="bookmark-button" data-behavior="trigger-overlay" type="submit"><span className="icon-bookmark-o"></span><span className="hide-text">Bookmark</span></button>
-                                        </form>
-                                    </div>
-
-                                </div>
-
-                                <div className="response-count pull-right">
-                                    <a className="response-count" href="javascript:void(0);">0 responses</a>
-                                </div>
-                            </div>
-                </div>
-                )}*/}
 
             </div>
 
-            </div>
-            </div>
+        </div>
+
     )
 }
 Profile.propTypes = {
