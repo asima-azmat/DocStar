@@ -22,18 +22,18 @@ class Feed extends Component {
         this.props.loadArticles()
     }
 
-    giveDoctorName(doctor)
+    static giveDoctorName(doctor)
     {
         return <a className="read-more" href={`/doctor/${doctor._id}`}>{doctor.firstName + ' ' + doctor.lastName}</a>
     }
 
-    getCreatedDate(date)
+    static getCreatedDate(date)
     {
         date = new Date(date);
         return date.toDateString();
     }
 
-    getNumberOfComments(comments)
+    static getNumberOfComments(comments)
     {
         return comments.length;
     }
@@ -47,13 +47,13 @@ class Feed extends Component {
                         <div className="post-body">
                             <p className="" dangerouslySetInnerHTML={{__html: article.blogText.substr(0,100)+'...'}}></p>
                         </div>
-                        <div className="response-count pull-right">Comments: <Badge>{this.getNumberOfComments(article.comments)}</Badge></div>
+                        <div className="response-count pull-right">Comments: <Badge>{Feed.getNumberOfComments(article.comments)}</Badge></div>
                         <a className="read-more" href={`/articleview/${article._id}`}>Read more</a>
                     </div>
 
                     <div className="post-stats clearfix">
-                        <div className="response-count pull-right">Created On: {this.getCreatedDate(article.createdAt)}</div>
-                        <div className="pull-left">By: {this.giveDoctorName(article.doctorId)}</div>
+                        <div className="response-count pull-right">Created On: {Feed.getCreatedDate(article.createdAt)}</div>
+                        <div className="pull-left">By: {Feed.giveDoctorName(article.doctorId)}</div>
                     </div>
                 </div>
             )
