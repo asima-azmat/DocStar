@@ -24,6 +24,7 @@
     "nodeidon": "0.0.3",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
+    "react-accessible-tabs": "^0.3.3",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.0.0",
     "react-facebook-login": "^4.0.1",
