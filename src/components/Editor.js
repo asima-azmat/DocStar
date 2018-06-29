@@ -4,9 +4,12 @@ import MediumEditor from 'medium-editor'
 import axios from 'axios'
 import EditorHeader from './EditorHeader'
 import './../../node_modules/medium-editor/dist/css/medium-editor.min.css'
+import AuthService from './AuthService';
 
-class Editor extends Component {
-  constructor () {
+class Editor extends Component
+{
+  constructor ()
+  {
     super()
     this.state = {
       title: '',
@@ -15,6 +18,9 @@ class Editor extends Component {
       imgSrc: null,
       loading: false
     }
+
+      this.Auth = new AuthService();
+
     this.handleClick = this.handleClick.bind(this)
     this.previewImg = this.previewImg.bind(this)
     this.publishStory = this.publishStory.bind(this)
@@ -26,27 +32,38 @@ class Editor extends Component {
     })
     console.log(this.state)  
     console.log('publishing...')
-    const _url = process.env.NODE_ENV === 'production' ? "/api/" : "http://localhost:5000/api/"
+    //CHNAGE CHNAGE CHANGEss=
+    const _url = process.env.NODE_ENV === 'production' ? "/api/" : "http://localhost:3000/"
     const formdata = new FormData()
-    formdata.append('text', this.state.text)
+    formdata.set('text', this.state.text)
     formdata.append('image', this.state.imgSrc)
     formdata.append('title', document.getElementById('editor-title').value)
     formdata.append('author_id', this.props.user._id)
     formdata.append('description', this.state.description)
-    formdata.append('claps', 0)
-    axios.post(`${_url}article`, /*{
+    formdata.append('claps', 0);
+    console.log(formdata.get('text'));
+      this.Auth.createBlog(document.getElementById('editor-title').value,this.state.text)
+          .then(res =>{
+              console.log(res)
+          })
+          .catch(err =>{
+              alert(err);
+          })
+    /*axios.post(`${_url}blog/create`, /!*{
       text: this.state.text,
       title: document.getElementById('editor-title').value,
       claps: 0,
       description: this.state.description,
       feature_img: this.state.imgSrc,
       author_id: this.props.user._id
-    }*/formdata).then((res) => {
+    }*!/formdata).then((res) => {
       this.setState({
         loading: false
       })
       console.log(res.data)
-    }).catch((err)=>{console.log(err); this.setState({loading: false})})
+    }).catch((err)=>{
+        alert(err);
+        console.log(err); this.setState({loading: false})})*/
   } 
 
   handleClick () {
@@ -111,7 +128,7 @@ class Editor extends Component {
             hideDelay: 300
         },
         placeholder: {
-            text: 'Tell your story...'
+            text: 'Write your blog...'
         }
       /*
       placeholder: { text: "Tell your Story ...", hideOnClick: true },
@@ -183,6 +200,7 @@ class Editor extends Component {
 const mapStateToProps = state => {
   return {
       user: state.authUser.user
+      //user: true
   }
 }
 export default connect(mapStateToProps)(Editor);

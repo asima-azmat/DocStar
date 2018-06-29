@@ -6,8 +6,8 @@ import {
     follow,
     insertComment
 } from './../redux/actions/actions'
-import {Badge,Chip} from 'react-materialize'
-import {Panel,Label,Button,ButtonToolbar} from 'react-bootstrap'
+import {Badge} from 'react-materialize'
+import {Panel,Label,Button,ButtonToolbar,DropdownButton,MenuItem} from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import axios from "axios/index";
 
@@ -116,7 +116,10 @@ class ArticleView extends Component
                     <div className="row animated fadeInUp" data-animation="fadeInUp-fadeOutDown">
                         <div id="main-post" className="col-xs-10 col-md-8 col-md-offset-2 col-xs-offset-1 main-content">
                             <div className="pull-right">
-
+                                <DropdownButton title="Settings" id="bg-nested-dropdown">
+                                    <MenuItem eventKey="1">Edit</MenuItem>
+                                    <MenuItem eventKey="2">Delete</MenuItem>
+                                </DropdownButton>
                             </div>
                             <div className="post-metadata">
                                 <img alt='' className="avatar-image" src={author_img} height="40" width="40" />

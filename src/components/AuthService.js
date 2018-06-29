@@ -2,6 +2,7 @@ import decode from 'jwt-decode';
 export default class AuthService {
     constructor(domain) {
         this.domain = domain || 'http://localhost:3000/auth'
+        this.route = 'http://localhost:3000/blog/create'
         this.fetch = this.fetch.bind(this)
         this.login = this.login.bind(this)
         this.getProfile = this.getProfile.bind(this)
@@ -17,6 +18,19 @@ export default class AuthService {
             })
         }).then(res => {
             this.setToken(res.token)
+            return Promise.resolve(res);
+        })
+    }
+
+    createBlog(blogHeading, blogText) {
+        // Get a token
+        return this.fetch(`${this.route}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                blogHeading,
+                blogText
+            })
+        }).then(res => {
             return Promise.resolve(res);
         })
     }
@@ -53,7 +67,9 @@ export default class AuthService {
 
     logout() {
         // Clear user token and profile data from localStorage
+        
         localStorage.removeItem('id_token');
+        
     }
 
     getProfile() {
