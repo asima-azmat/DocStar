@@ -51,7 +51,7 @@ class Header extends Component {
 
                 <li>
                   {" "}
-                  <Link className="nav-link" to="/finddoctors">
+                  <Link className="nav-link" to="/doctorfeed">
                     {" "}
                     Find Doctors{" "}
                   </Link>{" "}

@@ -17,6 +17,18 @@ export function loadArticles () {
     }
 }
 
+export function loadDoctors () {
+    return (dispatch) => {
+        axios.get(`${url}doctor`)
+            .then((res) => {
+                let doctors = res.data
+                dispatch({type: 'LOAD_DOCTORS', doctors})
+            }).catch((err) => {
+            console.log(err)
+        })
+    }
+}
+
 export function insertComment(commentText,blogId)
 {
     axios.post(`${url}blog/doComment`,{

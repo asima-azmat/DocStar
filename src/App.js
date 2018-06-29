@@ -10,7 +10,7 @@ import ArticleView from "./components/ArticleView";
 import Editor from "./components/Editor";
 import SignInWith from "./components/SignInWith";
 import AboutUs from "./components/AboutUs";
-
+import DoctorFeed from "./components/DoctorFeed";
 import AuthService from "./components/AuthService";
 import withAuth from "./components/withAuth";
 import FindDoctors from "./components/FindDoctors";
@@ -50,7 +50,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={AboutUs} />{" "}
           <Route exact path="/aboutus" component={AboutUs} />{" "}
-          <Route exact path="/finddoctors" component={FindDoctors} />{" "}
+          <Route exact path="/doctorfeed" component={DoctorFeed} />{" "}
           <Route exact path="/feed" component={Feed} />
           <Route exact path="/login" component={Login} />{" "}
           <Route path="/profile/:id" component={Profile} />{" "}
