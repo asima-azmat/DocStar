@@ -9,6 +9,8 @@ import App from './App.js';
 import { store, history } from './redux/store';
 import { getUser } from './redux/actions/actions'
 
+import { BrowserRouter } from 'react-router-dom';
+
 if(localStorage.Auth) {
     // update localstorage
     store.dispatch({type: 'SET_USER', user: JSON.parse(localStorage.Auth)})
