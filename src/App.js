@@ -24,6 +24,7 @@ export default class App extends React.Component
             routes: [
                 { component: FeedView , path: '/', exact: true},
                 { component: SingleBlogView , path: '/blog/:id', exact: true},
+                
                 { component: MovieDetailView , path: '/show/:id'},
                 { render: (props) => {
                         if(UserService.isAuthenticated()) {
