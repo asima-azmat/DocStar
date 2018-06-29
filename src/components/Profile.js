@@ -26,22 +26,27 @@ class Profile extends Component {
         //this.props.getUserProfile(this.props.match.params.id)
     }
 
+    static giveDoctorName(doctor)
+    {
+        return doctor.firstName + ' ' + doctor.lastName;
+    }
+
     render() {
 
         return (
             <div>
-                <ItemList items ={this.props} />
+                <ItemList doctor = {this.props.doctor} />
                 <TabView items = {this.props}/>
             </div>
         );
     }
 }
 
-function ItemList () {
+function ItemList (props) {
     return <div className="container container-fluid">
         <div className="row">
             <div className="col-md-6 col-md-offset-2">
-                <h2>Doctor's Name</h2>
+                <h2>{Profile.giveDoctorName(props.doctor)}</h2>
                 <h3>Specialty</h3>
                 <Rater total={5} rating={4} interactive={false}/>
             </div>

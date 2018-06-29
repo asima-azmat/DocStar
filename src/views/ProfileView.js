@@ -6,6 +6,7 @@ import Profile from '../components/Profile';
 import Header from '../components/HeaderNav';
 
 import './../assets/css/medium.css';
+import DoctorService from "../services/DoctorService";
 
 
 export class ProfileView extends React.Component
@@ -13,17 +14,24 @@ export class ProfileView extends React.Component
     constructor(props)
     {
         super(props);
-
-        this.state =
-            {
-                loading: false,
-                data: []
-            };
     }
 
     componentWillMount()
     {
-        this.setState({loading: false});
+        this.setState({
+            loading: true
+        });
+
+        let id = this.props.match.params.id;
+
+        DoctorService.getDoctor(id).then((data) => {
+            this.setState({
+                doctor: data,
+                loading: false
+            });
+        }).catch((e) => {
+            console.error(e);
+        });
     }
 
     render() {
@@ -35,7 +43,7 @@ export class ProfileView extends React.Component
         return (
             <div>
                 <Header/>
-                <Profile/>
+                <Profile doctor={this.state.doctor}/>
             </div>
         );
     }
