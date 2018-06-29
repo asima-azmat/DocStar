@@ -54,6 +54,7 @@ class App extends Component {
           <Route exact path="/feed" component={Feed} />
           <Route exact path="/login" component={Login} />{" "}
           <Route path="/profile/:id" component={Profile} />{" "}
+          <Route path="/blog/new" component={Editor}/>{" "}
           <Route path="/articleview/:id" component={ArticleView} />{" "}
           <Route path="**" component={Feed} />{" "}
         </Switch>{" "}
