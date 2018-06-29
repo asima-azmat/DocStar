@@ -3,6 +3,7 @@
 import React from 'react';
 
 import ArticleView from '../components/ArticleView';
+import Header from '../components/HeaderNav';
 
 import FeedService from '../services/FeedService';
 
@@ -59,8 +60,11 @@ export class SingleBlogView extends React.Component
         }
 
         return (
-            <ArticleView _article={this.state.blog} onDelete={(id) => this.deleteBlog(id)} 
-            insertComment={(comment) => this.addComment(comment)} error={this.state.error}/>
+            <div>
+                <Header/>
+                <ArticleView _article={this.state.blog} onDelete={(id) => this.deleteBlog(id)}
+                insertComment={(comment) => this.addComment(comment)} error={this.state.error}/>
+            </div>
         );
     }
 }

@@ -92,9 +92,11 @@ export default class HttpService {
                 window.location = "/#login";
             }
             else {
-                resp.json().then((json) => {
+                //CHANGE CHANGE CHANGE
+                onError(resp.statusText);
+                /*resp.json().then((json) => {
                     onError(json.error);
-                });
+                });*/
             }
         }).then((resp) => {
             if(resp.hasOwnProperty('token')) {
