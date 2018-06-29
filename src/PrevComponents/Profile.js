@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Doctor from './Ryan-Aaron.jpg'
 import "./Profile.css";
+import Review from './Review';
 import { 
     getUserProfile, 
     follow
@@ -65,23 +66,8 @@ function TabView () {
         <Tabs bsStyle="tabs">
             <Tab eventKey={1} title="Reviews">
                 <TabContent>
-                    <div className="container" style={{margin:'10px'}}>
-                        <div className="row border border-primary">
-                            <div className="col-md-6">
-                                <h5 id = "ReviewSummary"><b>Excellent Doctor</b></h5>
-                                <h5 id = "ReviewDetail">I have visited Dr Aaron and found his services to be very satisfactory.
-                                    I have visited Dr Aaron and found his services to be very satisfactory.
-                                    I have visited Dr Aaron and found his services to be very satisfactory.
-                                    I have visited Dr Aaron and found his services to be very satisfactory.
-                                    I have visited Dr Aaron and found his services to be very satisfactory.</h5>
-                            </div>
-                            <div className="col-md-2">
-                                <Rater total={5} rating={4} interactive={false}>
-                                    <Star className = "react-rater-star-individual"/>
-                                </Rater>
-                            </div>
-                        </div>
-                    </div>
+                    <Review Summary = "Excellent Doctor" Detail = "I have visited Dr Aaron and found his services to be very satisfactory.">
+                    </Review>
                 </TabContent>
             </Tab>
             <Tab eventKey={2} title="Provide Review">
