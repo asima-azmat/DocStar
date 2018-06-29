@@ -10,6 +10,7 @@ import { UserLoginView } from "./views/UserLoginView";
 import { UserSignupView } from "./views/UserSignupView";
 import { FeedView } from './views/FeedView';
 import { SingleBlogView } from './views/SingleBlogView';
+import { ProfileView } from './views/ProfileView';
 
 import UserService from "./services/UserService";
 
@@ -24,7 +25,7 @@ export default class App extends React.Component
             routes: [
                 { component: FeedView , path: '/', exact: true},
                 { component: SingleBlogView , path: '/blog/:id', exact: true},
-                
+                { component: ProfileView , path: '/doctor/:id', exact: true},
                 { component: MovieDetailView , path: '/show/:id'},
                 { render: (props) => {
                         if(UserService.isAuthenticated()) {

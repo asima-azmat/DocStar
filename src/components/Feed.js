@@ -46,7 +46,7 @@ class Feed extends Component {
 
                     <div className="post-stats clearfix">
                         <div className="response-count pull-right">Created On: {Feed.getCreatedDate(article.createdAt)}</div>
-                        <div className="pull-left">By: {Feed.giveDoctorName(article.doctorId)}</div>
+                        <div className="pull-left">By: <Link to={`/doctor/${article.doctorId._id}`}>{Feed.giveDoctorName(article.doctorId)}</Link></div>
                     </div>
                 </div>
             )

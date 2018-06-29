@@ -1,9 +1,7 @@
-import {follow, getUserProfile} from "../redux/actions/actions";
-import {connect} from "react-redux";
-import PropTypes from "prop-types";
 import React, { Component } from 'react';
 import Rater from "react-rater";
 import {Star} from "react-rater";
+import { withRouter} from 'react-router-dom';
 
 class Review extends Component {
     Summary;
@@ -29,19 +27,4 @@ class Review extends Component {
     }
 }
 
-
-Review.propTypes = {
-    params: PropTypes.object.isRequired
-}
-
-const mapStateToProps = state => {
-    return {
-        _article: state.articles.article,
-        user: state.authUser.user,
-        profile: state.authUser.profile
-    }
-}
-export default connect(mapStateToProps, {
-    getUserProfile,
-    follow
-})(Review);
+export default withRouter(Review);
