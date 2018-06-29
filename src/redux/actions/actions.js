@@ -63,6 +63,19 @@ export function getArticle (article_id) {
         }).catch((err) => console.log(err))
     }
 }
+
+
+export function getDoctor (doctor_id) {
+    return (dispatch) => {
+        axios.get(`${url}doctor/${doctor_id}`)
+            .then((res) => {
+                let doctor = res.data
+                dispatch({type: 'VIEW_DOCTOR', doctor})
+            }).catch((err) => console.log(err))
+    }
+}
+
+
 // article_id, author_id, comment
 export function comment () {
     return (dispatch) => {

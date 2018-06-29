@@ -12,6 +12,7 @@ import SignInWith from "./components/SignInWith";
 import AboutUs from "./components/AboutUs";
 import DoctorFeed from "./components/DoctorFeed";
 import AuthService from "./components/AuthService";
+import DoctorView from "./components/DoctorView"
 import withAuth from "./components/withAuth";
 import FindDoctors from "./components/FindDoctors";
 
@@ -56,6 +57,7 @@ class App extends Component {
           <Route path="/profile/:id" component={Profile} />{" "}
           <Route path="/blog/new" component={Editor}/>{" "}
           <Route path="/articleview/:id" component={ArticleView} />{" "}
+          <Route path="/doctorview/:id" component={DoctorView} />{" "}
           <Route path="**" component={Feed} />{" "}
         </Switch>{" "}
       </div>
