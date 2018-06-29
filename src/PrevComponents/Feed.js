@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {
+    loadArticles
+} from './../redux/actions/actions'
 import AsideFeed from './AsideFeed'
-import {Badge} from 'react-materialize'
-import { withRouter, Link} from 'react-router-dom';
-import { Button } from 'react-md';
+import {Badge,Button} from 'react-materialize'
+
+const mapStateToProps = state => {
+    return {
+        articles: state.articles.articles
+    }
+}
 
 class Feed extends Component {
 
-    componentWillReceiveProps(nextProps) 
-    {    
+    componentWillReceiveProps(nextProps) {
+        
     }
         
-    componentWillMount() 
-    {
-        //this.props.loadArticles()
+    componentWillMount() {
+        this.props.loadArticles()
     }
 
     static giveDoctorName(doctor)
@@ -36,12 +43,12 @@ class Feed extends Component {
         const articles = this.props.articles.reverse().map((article)=>
                 <div className="post-panel">
                     <div className="main-body">
-                        <h3 className="post-title"><Link to={`/blog/${article._id}`}>{article.blogHeading}</Link></h3>
+                        <h3 className="post-title"><a href={`/articleview/${article._id}`}>{article.blogHeading}</a></h3>
                         <div className="post-body">
                             <p className="" dangerouslySetInnerHTML={{__html: article.blogText.substr(0,100)+'...'}}></p>
                         </div>
                         <div className="response-count pull-right">Comments: <Badge>{Feed.getNumberOfComments(article.comments)}</Badge></div>
-                        <a className="read-more"><Link to={`/blog/${article._id}`}>Read more</Link></a>
+                        <a className="read-more" href={`/articleview/${article._id}`}>Read more</a>
                     </div>
 
                     <div className="post-stats clearfix">
@@ -66,4 +73,4 @@ class Feed extends Component {
     }
 }
 
-export default withRouter(Feed);
+export default connect(mapStateToProps, { loadArticles })(Feed);
