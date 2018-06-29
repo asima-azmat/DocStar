@@ -9,14 +9,12 @@ class FindDoctors extends Component {
         this.Auth = new AuthService();
     }
     componentWillMount(){
-        if(this.Auth.loggedIn())
-            this.props.history.replace('/');
     }
     render() {
         return (
             <div className="center">
                 <div className="card">
-                    <h1>Find Doctors page under developmet</h1>
+                    <h1>Find c Us page we are  a doctors website :)</h1>
                   
                 </div>
             </div>
