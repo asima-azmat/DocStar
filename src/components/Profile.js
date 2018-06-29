@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import FollowButton from './FollowButton'
+import Doctor from './Ryan-Aaron.jpg'
 import { 
     getUserProfile, 
     follow
 } from './../redux/actions/actions'
+import Tabs from "react-bootstrap/es/Tabs";
+import Tab from "react-bootstrap/es/Tab";
+
 
 class Profile extends Component {
 
@@ -21,109 +24,42 @@ class Profile extends Component {
 
     render() {
 
-        return ( 
+        return (
             <div>
-            {/*{Object.keys(this.props.profile).length > 0 ? <ItemList items ={this.props} /> : ''}*/
                 <ItemList items ={this.props} />
-            }
+                <div className="row">
+                    <div className="col-md-12 col-md-offset-2" style={{marginRight: 2 + 'em'}}>
+                        <Tabs bsStyle="pills">
+                            <Tab eventKey={1} title="Reviews">
+                                Tab 1 content
+                            </Tab>
+                            <Tab eventKey={2} title="Provide Review">
+                                Tab 2 content
+                            </Tab>
+                            <Tab eventKey={3} title="Book Appointment">
+                                Tab 3 content
+                            </Tab>
+                        </Tabs>
+                    </div>
+                </div>
             </div>
         );
     }
 }
 
-function ItemList ({items}) {
-    return (
-            <div className="users show">
-            <div className="container-fluid main-container">
-            <div className="banner-container animated fadeInUp-small" data-animation="fadeInUp-fadeOutDown-slow">
-                <div className="hero-wrapper">
-                    <header className="hero">
-                        <div className="profile-info">
-                            <h1 className="hero-title">Dr. Ryan Aaron</h1>
-                            <p className="hero-description">Orthodontist</p>
-                            <div className="hero-location">
-                                <i className="fa fa-map-marker"></i>Rating
-                            </div>
-                        </div>
-                        <div className="hero-avatar">
-                            <img alt="Picture" className="avatar-image" src="Ryan-Aaron.jpg" height="100" width="100"/>
-                        </div>
-                    </header>
-
-                    <div>
-                        {/*<div data-react-className="UserFollowContainer" data-react-props="{&quot;followerCount&quot;:6,&quot;followingCount&quot;:2,&quot;following&quot;:false,&quot;followed_id&quot;:396,&quot;hideButton&quot;:false,&quot;username&quot;:&quot;mark&quot;,&quot;overlayTrigger&quot;:true}">
-                            <div data-reactroot="">
-                                <div className="following-metadata"><span className="following-count"><span><span><b>{items.profile.user.following.length}</b> Following</span></span>
-                                    </span><span className="follower-count"><span><span><b>{items.profile.user.followers.length}</b> Followers</span></span>
-                                    </span>
-                                </div>
-                                <div>{items.user.name ? <FollowButton user={`${items.user.following}`} to_follow={`${items.profile.user._id}`} /> : ''}</div>
-                            </div>
-                        </div>*/}
-
-                    </div>
-                </div>
+function ItemList () {
+    return <div className="container container-fluid">
+        <div className="row">
+            <div className="col-md-6 col-md-offset-2">
+                <h2>Doctor's Name</h2>
+                <h3>Specialty</h3>
+                <h4>Overall Rating</h4>
             </div>
-
-
-            <div className="posts-wrapper animated fadeInUp" data-animation="fadeInUp-fadeOutDown">
-
-                {/*<h4 className="small-heading border-top">latest</h4>
-                { items.profile.articles.map((article)=>
-                        <div className="post-panel">
-
-                            <div className="post-metadata">
-                                <img alt="mark" className="avatar-image" src={items.profile.user.provider_pic} height="40" width="40"/>
-                                <div className="post-info">
-                                    <div data-react-className="PopoverLink"><span className="popover-link" data-reactroot=""><a href="javascript:void(0);">{items.profile.user.name}</a></span></div>
-                                    <small>Published • a must read</small>
-                                </div>
-                            </div>
-
-
-                            {article.feature_img.length > 0 ? <div className="post-picture-wrapper">
-                                <img src={article.feature_img} alt="alt"/>
-                            </div> : ''}
-
-                            <div className="main-body">
-                                <h3 className="post-title"><a href={`/articleview/${article._id}`}>{article.title}</a></h3>
-                                <div className="post-body">
-                                    <p className="" dangerouslySetInnerHTML={{__html: article.description}}></p>
-                                </div>
-                                <a className="read-more" href={`/articleview/${article._id}`}>Read more</a>
-                            </div>
-
-                            <div className="post-stats clearfix">
-                                <div className="pull-left">
-                                    <div className="like-button-wrapper">
-                                        <form className="button_to" method="get" action="">
-                                            <button className="like-button" data-behavior="trigger-overlay" type="submit"><i className="fa fa-heart-o"></i><span className="hide-text">Like</span></button>
-                                        </form>
-                                        <span className="like-count">{article.claps}</span>
-                                    </div>
-
-                                </div>
-
-                                <div className="pull-right">
-                                    <div className="bookmark-button-wrapper">
-                                        <form className="button_to" method="get" action=""><button className="bookmark-button" data-behavior="trigger-overlay" type="submit"><span className="icon-bookmark-o"></span><span className="hide-text">Bookmark</span></button>
-                                        </form>
-                                    </div>
-
-                                </div>
-
-                                <div className="response-count pull-right">
-                                    <a className="response-count" href="javascript:void(0);">0 responses</a>
-                                </div>
-                            </div>
-                </div>
-                )}*/}
-
+            <div className="col-md-2" style={{marginTop: 3 + 'em'}}>
+                <img src={Doctor} className="img-responsive" alt="Doctor Profile Picture"></img>
             </div>
-
-            </div>
-            </div>
-    )
+        </div>
+    </div>
 }
 Profile.propTypes = {
     params: PropTypes.object.isRequired

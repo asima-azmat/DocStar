@@ -15,6 +15,11 @@ import AuthService from "./components/AuthService";
 import withAuth from "./components/withAuth";
 import FindDoctors from "./components/FindDoctors";
 
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+
+
+
 const Auth = new AuthService();
 
 //import  from './components'
