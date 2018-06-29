@@ -20,25 +20,25 @@ class DoctorSearchSideBar extends Component {
        <form>
 
            Name: <br/>
-           <input type="text" name="firstname" value=""/>
+           <input type="text" name="name" />
            <br/>
            City: <br/>
-           <input type="text" name="firstname" value=""/>
+           <input type="text" name="city" />
            <br/>
            Area: <br/>
-           <input type="text" name="firstname" value=""/>
+           <input type="text" name="area" />
            <br/>
            Speciality: <br/>
-           <input type="text" name="firstname" value=""/>
+           <input type="text" name="speciality" />
            <br/>
            Language:<br/>
-           <input type="text" name="lastname" value=""/>
+           <input type="text" name="language" />
            <br/>
            Accepted Insurance: <br/>
-           <input type="text" name="firstname" value=""/>
+           <input type="text" name="insurance" />
            <br/>
            Opening Housrs: <br/>
-           <input type="text" name="firstname" value=""/>
+           <input type="text" name="openinghours" />
            <br/>
            <br/>
 
