@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import KebabMenu from './KebabMenu';
-import { Toolbar } from 'react-md';
+import { Navbar, Nav, NavItem} from "react-bootstrap";
 
 class Header extends Component 
 {
@@ -13,14 +13,25 @@ class Header extends Component
     return (
       <div>
         <div>
-          <div data-behavior="progress-bar" className="progress-bar">
+            <Navbar fixedTop={true}>
+                <Navbar.Header>
+                    <Navbar.Brand><Link to={'/'}>DocStar</Link></Navbar.Brand>
+                </Navbar.Header>
+                <Nav pullRight>
+                    <Navbar.Text>Signed in as:</Navbar.Text>
+                    <KebabMenu id="toolbar-transparent-kebab-menu" />
+                </Nav>
+            </Navbar>
+{/*          <div data-behavior="progress-bar" className="progress-bar">
             {" "}
           </div>
           <nav data-behavior="animated-navbar" className="navbar navbar-default navbar-fixed-top is-inView">
             <div className="container-fluid col-md-10 col-md-offset-1">
-                <Toolbar className="navbar-header" title="DocStar" actions={<KebabMenu id="toolbar-transparent-kebab-menu" />}/>
+                <div className="navbar-header">
+                    <KebabMenu id="toolbar-transparent-kebab-menu" />
+                </div>
             </div>
-          </nav>
+          </nav>*/}
         </div>
       </div>
     );

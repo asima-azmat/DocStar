@@ -37,25 +37,6 @@ export class FeedView extends React.Component
         });
     }
 
-    deleteMovie(id) {
-        this.setState({
-            data: [...this.state.data],
-            loading: true
-        });
-        FeedService.deleteMovie(id).then((message) => {
-
-            let movieIndex = this.state.data.map(movie => movie['_id']).indexOf(id);
-            let movies = this.state.data;
-            movies.splice(movieIndex, 1);
-            this.setState({
-               data: [...movies],
-               loading: false
-            });
-        }).catch((e) => {
-            console.error(e);
-        });
-    }
-
     render() {
         if (this.state.loading) 
         {
