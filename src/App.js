@@ -1,68 +1,65 @@
-import React, { Component } from "react";
-import Header from "./components/Header";
-import { Switch, Route, Link } from "react-router-dom";
-import Login from "./components/Login";
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+"use strict";
 
-import Feed from "./components/Feed";
-import Profile from "./components/Profile";
-import ArticleView from "./components/ArticleView";
-import Editor from "./components/Editor";
-import SignInWith from "./components/SignInWith";
-import AboutUs from "./components/AboutUs";
-import DoctorFeed from "./components/DoctorFeed";
-import AuthService from "./components/AuthService";
-import DoctorView from "./components/DoctorView"
-import withAuth from "./components/withAuth";
-import FindDoctors from "./components/FindDoctors";
+import React from 'react';
+import { HashRouter as Router, Route, Switch, Redirect, browserHistory} from 'react-router-dom';
 
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { MovieListView } from './views/MovieListView';
+import { MovieDetailView }   from './views/MovieDetailView';
+import { MovieFormView }   from './views/MovieFormView';
+import { UserLoginView } from "./views/UserLoginView";
+import { UserSignupView } from "./views/UserSignupView";
+import { FeedView } from './views/FeedView';
+import { SingleBlogView } from './views/SingleBlogView';
+
+import UserService from "./services/UserService";
 
 
+export default class App extends React.Component 
+{
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            title: 'DocStar App',
+            routes: [
+                { component: FeedView , path: '/', exact: true},
+                { component: SingleBlogView , path: '/blog/:id', exact: true},
+                { component: MovieDetailView , path: '/show/:id'},
+                { render: (props) => {
+                        if(UserService.isAuthenticated()) {
+                            return (<MovieFormView {... props} />)
+                        }
+                        else {
+                            return (<Redirect to={'/login'}/>)
+                        }} , path: '/edit/:id'},
+                { render: (props) => {
+                    if(UserService.isAuthenticated()) {
+                        return (<MovieFormView {... props} />)
+                    }
+                    else {
+                        return (<Redirect to={'/login'}/>)
+                    }}, path: '/add',},
+                { component: UserLoginView, path: '/login'},
+                { component: UserSignupView, path: '/register'}
+            ]
+        };
+    }
 
-const Auth = new AuthService();
+    componentDidMount(){
+        document.title = this.state.title;
+    }
 
-//import  from './components'
-
-class App extends Component {
-  handleLogout() {
-    Auth.logout();
-    this.props.history.replace("/login");
-  }
-  render() {
-    const pathname = window.location.pathname;
-    return (
-      <div>
-                  { !pathname.includes('login') ? <Header /> : '' }
-
-                                    { !pathname.includes('login') ? <button
-                  type="button"
-                  className="form-submit"
-                  onClick={this.handleLogout.bind(this)}
-                >
-                  Logout
-                </button> : '' }
-
-
-
- 
-
-        <Switch>
-          <Route exact path="/" component={AboutUs} />{" "}
-          <Route exact path="/aboutus" component={AboutUs} />{" "}
-          <Route exact path="/doctorfeed" component={DoctorFeed} />{" "}
-          <Route exact path="/feed" component={Feed} />
-          <Route exact path="/login" component={Login} />{" "}
-          <Route path="/profile/:id" component={Profile} />{" "}
-          <Route path="/blog/new" component={Editor}/>{" "}
-          <Route path="/articleview/:id" component={ArticleView} />{" "}
-          <Route path="/doctorview/:id" component={DoctorView} />{" "}
-          <Route path="**" component={Feed} />{" "}
-        </Switch>{" "}
-      </div>
-    );
-  }
+    render() 
+    {
+        return(
+            <div>
+                <Router history={browserHistory}>
+                    <Switch>
+                        {this.state.routes.map((route, i) => (<Route key={i} {...route}/>) )}
+                    </Switch>
+                </Router>
+            </div>
+        );
+    }
 }
 
-export default App;

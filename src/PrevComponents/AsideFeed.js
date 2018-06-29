@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import {Badge} from 'react-materialize'
-import { Link } from 'react-router-dom';
-import { Button } from 'react-md';
 
 class AsideFeed extends Component
 {
@@ -21,7 +19,7 @@ class AsideFeed extends Component
                 return self.indexOf(a) === b
             })
             .map((doctor)=>
-                <a className="tag"><Link to={`/doctor/${doctor.substr(doctor.indexOf('|')+1)}`}>{doctor.substr(0,doctor.indexOf('|'))}</Link></a>
+                <a href={`/doctor/${doctor.substr(doctor.indexOf('|')+1)}`} className="tag">{doctor.substr(0,doctor.indexOf('|'))}</a>
             )
 
         const top_articles = this.props._articles.filter(_article => _article.comments.length > 0).sort(function(a1,a2){
@@ -32,7 +30,7 @@ class AsideFeed extends Component
                         <span className="count-button">{i+1}</span>
                     </div>
                     <div className="top-stories-links">
-                        <a className="post-title"><Link to={`/blog/${_article._id}`}>{_article.blogHeading}</Link></a><br/><br/>
+                        <a className="post-title" href={`/articleview/${_article._id}`}>{_article.blogHeading}</a><br/><br/>
                         <small>
                           <div data-react-className="PopoverLink" data-react-props="">
                             <span className="popover-link" data-reactroot=""><Badge>{_article.comments.length}</Badge> comments</span>
@@ -59,7 +57,6 @@ class AsideFeed extends Component
                         </ul>
                     </div>
                 </aside>
-                <Button floating secondary className="pull-left">edit</Button>
             </div>
         )
     }
