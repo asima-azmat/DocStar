@@ -2,7 +2,8 @@
 
 import React from 'react';
 
-import MovieForm from './../components/MovieForm';
+import Editor from './../components/Editor';
+import Header from '../components/HeaderNav';
 
 import MovieService from '../services/MovieService';
 import FeedService from '../services/FeedService';
@@ -15,7 +16,8 @@ export class BlogEditorView extends React.Component {
     }
 
     componentWillMount(){
-        if(this.props.history.location.pathname == '/blog/create') {
+        console.log(this.props.history.location.pathname);
+        if(this.props.history.location.pathname === '/blog/create') {
             this.setState({
                 loading: false,
                 blog: undefined,
@@ -49,7 +51,7 @@ export class BlogEditorView extends React.Component {
         }
     }
 
-    updateMovie(blog) {
+    updateBlog(blog) {
         if(this.state.blog == undefined) {
             MovieService.createMovie(blog).then((data) => {
                 this.props.history.push('/');
@@ -69,9 +71,14 @@ export class BlogEditorView extends React.Component {
 
     render() {
         if (this.state.loading) {
-            return (<h2>Loading...</h2>);
+            return (<div></div>);
         }
 
-        return (<MovieForm blog={this.state.blog} onSubmit={(blog) => this.updateMovie(blog)} error={this.state.error} />);
+        return (
+            <div>
+                <Header/>
+                <Editor blog={this.state.blog} onSubmit={(blog) => this.updateBlog(blog)} error={this.state.error} />
+            </div>
+        );
     }
 }

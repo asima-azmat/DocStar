@@ -24,7 +24,6 @@ export default class App extends React.Component
             title: 'DocStar App',
             routes: [
                 { component: FeedView , path: '/', exact: true},
-                { component: SingleBlogView , path: '/blog/:id', exact: true},
                 { component: ProfileView , path: '/doctor/:id', exact: true},
                 { render: (props) => {
                         if(UserService.isAuthenticated()) {
@@ -39,7 +38,8 @@ export default class App extends React.Component
                     }
                     else {
                         return (<Redirect to={'/login'}/>)
-                    }}, path: '/blog/create',},
+                    }}, path: '/blog/create', exact: true},
+                { component: SingleBlogView , path: '/blog/:id', exact:true},
                 { component: UserLoginView, path: '/login'},
                 { component: UserSignupView, path: '/register'}
             ]

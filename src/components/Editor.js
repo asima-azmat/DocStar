@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 import MediumEditor from 'medium-editor'
-import axios from 'axios'
-import EditorHeader from './EditorHeader'
 import './../../node_modules/medium-editor/dist/css/medium-editor.min.css'
-import AuthService from './AuthService';
+import './../assets/css/medium.css';
+import { withRouter } from "react-router-dom";
 
 class Editor extends Component
 {
@@ -18,8 +16,6 @@ class Editor extends Component
       imgSrc: null,
       loading: false
     }
-
-      this.Auth = new AuthService();
 
     this.handleClick = this.handleClick.bind(this)
     this.previewImg = this.previewImg.bind(this)
@@ -41,29 +37,6 @@ class Editor extends Component
     formdata.append('author_id', this.props.user._id)
     formdata.append('description', this.state.description)
     formdata.append('claps', 0);
-    console.log(formdata.get('text'));
-      this.Auth.createBlog(document.getElementById('editor-title').value,this.state.text)
-          .then(res =>{
-              console.log(res)
-          })
-          .catch(err =>{
-              alert(err);
-          })
-    /*axios.post(`${_url}blog/create`, /!*{
-      text: this.state.text,
-      title: document.getElementById('editor-title').value,
-      claps: 0,
-      description: this.state.description,
-      feature_img: this.state.imgSrc,
-      author_id: this.props.user._id
-    }*!/formdata).then((res) => {
-      this.setState({
-        loading: false
-      })
-      console.log(res.data)
-    }).catch((err)=>{
-        alert(err);
-        console.log(err); this.setState({loading: false})})*/
   } 
 
   handleClick () {
@@ -149,15 +122,14 @@ class Editor extends Component
     render() {
         return ( 
 <div>
-  <EditorHeader publish={this.publishStory} loading={this.state.loading} />
     <div className="container-fluid main-container">
       <div className="row animated fadeInUp" data-animation="fadeInUp-fadeOutDown">
           <div id="main-post" className="col-xs-10 col-md-8 col-md-offset-2 col-xs-offset-1 main-content">
               <div className="post-metadata">
-                  <img alt={this.props.user.name} className="avatar-image" src={this.props.user.provider_pic} height="40" width="40" />
+                  <img alt={"Image"} className="avatar-image" src={"Sure"} height="40" width="40" />
                   <div className="post-info">
-                      <div data-react-className="PopoverLink" data-react-props="{&quot;user_id&quot;:608,&quot;url&quot;:&quot;/users/netk&quot;,&quot;children&quot;:&quot;netk&quot;}"><span className="popover-link" data-reactroot=""><a href="">{this.props.user.name}</a></span></div>
-                      <small>{this.props.user.email}</small>
+                      <div data-react-className="PopoverLink" data-react-props="{&quot;user_id&quot;:608,&quot;url&quot;:&quot;/users/netk&quot;,&quot;children&quot;:&quot;netk&quot;}"><span className="popover-link" data-reactroot=""><a href="">{"name"}</a></span></div>
+                      <small>{"email"}</small>
                   </div>
               </div>
 
@@ -197,10 +169,5 @@ class Editor extends Component
         );
     }
 }
-const mapStateToProps = state => {
-  return {
-      user: state.authUser.user
-      //user: true
-  }
-}
-export default connect(mapStateToProps)(Editor);
+
+export default withRouter(Editor);

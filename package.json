@@ -32,18 +32,19 @@
     "webpack-merge": "4.1.0"
   },
   "dependencies": {
+    "medium-editor": "^5.23.3",
     "react": "16.2.0",
-    "react-dom": "16.2.0",
-    "react-router-dom": "4.2.2",
     "react-bootstrap": "^0.32.1",
     "react-bootstrap-date-picker": "^5.1.0",
     "react-bootstrap-datetimepicker": "0.0.22",
+    "react-dom": "16.2.0",
+    "react-hot-loader": "next",
+    "react-materialize": "^2.3.1",
     "react-md": "1.2.11",
     "react-rater": "^5.0.1",
-    "react-hot-loader": "next",
-    "webfontloader": "1.6.28",
+    "react-router-dom": "4.2.2",
     "styled-components": "3.1.6",
-    "react-materialize": "^2.3.1"
+    "webfontloader": "1.6.28"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -56,7 +56,7 @@ export class SingleBlogView extends React.Component
     render() {
         if (this.state.loading) 
         {
-            return (<h2>Loading...</h2>);
+            return (<div></div>);
         }
 
         return (
