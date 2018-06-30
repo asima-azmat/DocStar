@@ -15,6 +15,11 @@ export class SingleBlogView extends React.Component
     constructor(props) 
     {
         super(props);
+        this.state =
+        {
+            loading: false,
+            blog: []
+        };
     }
 
     componentWillMount()

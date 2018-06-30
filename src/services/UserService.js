@@ -51,6 +51,24 @@ export default class UserService {
         };
     }
 
+    static getCurrentUserDetails()
+    {
+        const userCreds = this.getCurrentUser();
+        if (userCreds.id != null)
+        {
+            return new Promise((resolve, reject) => {
+                HttpService.get(`${UserService.baseURL()}/me`, function(data) {
+                    resolve(data);
+                }, function(textStatus) {
+                    reject(textStatus);
+                });
+            });
+        }
+        else {
+
+        }
+    }
+
     static isAuthenticated() {
         return !!window.localStorage['jwtToken'];
     }
