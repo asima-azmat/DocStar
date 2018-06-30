@@ -7,6 +7,7 @@ import Header from '../components/HeaderNav';
 
 import MovieService from '../services/MovieService';
 import FeedService from '../services/FeedService';
+import UserService from '../services/UserService';
 
 
 export class BlogEditorView extends React.Component {
@@ -16,25 +17,27 @@ export class BlogEditorView extends React.Component {
     }
 
     componentWillMount(){
-        console.log(this.props.history.location.pathname);
         if(this.props.history.location.pathname === '/blog/create') {
             this.setState({
-                loading: false,
+                loading: true,
                 blog: undefined,
-                error: undefined
+                error: undefined,
+                newFlag: true
             });
         }
-        else if(this.props.location.state != undefined && this.props.location.state.blog != undefined) {
+        else if(this.props.location.state != undefined) {
             this.setState({
-                loading: false,
-                blog: this.props.location.state.blog,
-                error: undefined
+                loading: true,
+                blog: this.props.location.state,
+                error: undefined,
+                newFlag: false
             });
         }
         else {
             this.setState({
                 loading: true,
-                error: undefined
+                error: undefined,
+                newFlag: false
             });
 
             let id = this.props.match.params.id;
@@ -42,42 +45,50 @@ export class BlogEditorView extends React.Component {
             FeedService.getBlog(id).then((data) => {
                 this.setState({
                     blog: data,
-                    loading: false,
                     error: undefined
                 });
             }).catch((e) => {
                 console.error(e);
             });
         }
+
+        UserService.getCurrentUserDetails().then((data) => {
+            this.setState({
+                user: data,
+                loading: false
+            });
+        }).catch((e) => {
+            console.error(e);
+        });
     }
 
     updateBlog(blog) {
-        if(this.state.blog == undefined) {
-            MovieService.createMovie(blog).then((data) => {
+        if(this.state.blog === undefined) {
+            FeedService.createBlog(blog).then((data) => {
                 this.props.history.push('/');
             }).catch((e) => {
                 console.error(e);
                 this.setState(Object.assign({}, this.state, {error: 'Error while creating blog'}));
             });
         } else {
-            MovieService.updateMovie(blog).then((data) => {
+            FeedService.updateBlog(this.state.blog._id,blog).then((data) => {
                 this.props.history.goBack();
             }).catch((e) => {
                 console.error(e);
-                this.setState(Object.assign({}, this.state, {error: 'Error while creating blog'}));
+                this.setState(Object.assign({}, this.state, {error: 'Error while updating blog'}));
             });
         }
     }
 
     render() {
         if (this.state.loading) {
-            return (<div></div>);
+            return (<div>asdasdas</div>);
         }
 
         return (
             <div>
                 <Header/>
-                <Editor blog={this.state.blog} onSubmit={(blog) => this.updateBlog(blog)} error={this.state.error} />
+                <Editor blog={this.state.blog} isNew={this.state.newFlag} user={this.state.user} onSubmit={(blog) => this.updateBlog(blog)} error={this.state.error} />
             </div>
         );
     }
