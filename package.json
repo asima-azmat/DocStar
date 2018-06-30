@@ -29,7 +29,8 @@
     "style-loader": "0.19.0",
     "webpack": "3.3.0",
     "webpack-dev-server": "2.9.1",
-    "webpack-merge": "4.1.0"
+    "webpack-merge": "4.1.0",
+    "@appbaseio/reactivesearch": "^2.3.2"
   },
   "dependencies": {
     "medium-editor": "^5.23.3",
@@ -39,6 +40,7 @@
     "react-bootstrap-datetimepicker": "0.0.22",
     "react-dom": "16.2.0",
     "react-hot-loader": "next",
+    "@appbaseio/reactivesearch": "^2.3.2",
     "react-materialize": "^2.3.1",
     "react-md": "1.2.11",
     "react-rater": "^5.0.1",

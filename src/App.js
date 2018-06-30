@@ -3,14 +3,14 @@
 import React from 'react';
 import { HashRouter as Router, Route, Switch, Redirect, browserHistory} from 'react-router-dom';
 
-import { MovieDetailView }   from './views/MovieDetailView';
-import { MovieFormView }   from './views/MovieFormView';
 import { UserLoginView } from "./views/UserLoginView";
 import { UserSignupView } from "./views/UserSignupView";
 import { FeedView } from './views/FeedView';
 import { SingleBlogView } from './views/SingleBlogView';
 import { ProfileView } from './views/ProfileView';
 import { BlogEditorView } from './views/BlogEditorView';
+
+import SearchView  from './views/SearchView';
 
 import UserService from "./services/UserService";
 
@@ -26,13 +26,6 @@ export default class App extends React.Component
                 { component: FeedView , path: '/', exact: true},
                 { component: ProfileView , path: '/doctor/:id', exact: true},
                 { render: (props) => {
-                        if(UserService.isAuthenticated()) {
-                            return (<MovieFormView {... props} />)
-                        }
-                        else {
-                            return (<Redirect to={'/login'}/>)
-                        }} , path: '/edit/:id'},
-                { render: (props) => {
                     if(UserService.isAuthenticated()) {
                         return (<BlogEditorView {... props} />)
                     }
@@ -40,8 +33,18 @@ export default class App extends React.Component
                         return (<Redirect to={'/login'}/>)
                     }}, path: '/blog/create', exact: true},
                 { component: SingleBlogView , path: '/blog/:id', exact:true},
+                { render: (props) => {
+                        if(UserService.isAuthenticated()) {
+                            return (<BlogEditorView {... props} />)
+                        }
+                        else {
+                            return (<Redirect to={'/login'}/>)
+                        }} , path: '/blog/:id/edit', exact: true},
                 { component: UserLoginView, path: '/login'},
-                { component: UserSignupView, path: '/register'}
+                { component: UserSignupView, path: '/register'},
+                  { component: SearchView, path: '/search'},
+
+
             ]
         };
     }
@@ -63,4 +66,3 @@ export default class App extends React.Component
         );
     }
 }
-
