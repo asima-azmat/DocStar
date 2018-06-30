@@ -62,9 +62,9 @@ export default class FeedService
         });
     }
 
-    static updateMovie(movie) {
+    static updateBlog(id,blog) {
         return new Promise((resolve, reject) => {
-            HttpService.put(`${this.baseURL()}/${movie._id}`, movie, function(data) {
+            HttpService.put(`${FeedService.baseURL()}/${id}`, blog, function(data) {
                 resolve(data);
             }, function(textStatus) {
                reject(textStatus);

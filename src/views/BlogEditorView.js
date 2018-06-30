@@ -22,19 +22,22 @@ export class BlogEditorView extends React.Component {
                 loading: true,
                 blog: undefined,
                 error: undefined,
+                newFlag: true
             });
         }
-        else if(this.props.location.state != undefined && this.props.location.state.blog != undefined) {
+        else if(this.props.location.state != undefined) {
             this.setState({
                 loading: true,
-                blog: this.props.location.state.blog,
-                error: undefined
+                blog: this.props.location.state,
+                error: undefined,
+                newFlag: false
             });
         }
         else {
             this.setState({
                 loading: true,
-                error: undefined
+                error: undefined,
+                newFlag: false
             });
 
             let id = this.props.match.params.id;
@@ -60,7 +63,6 @@ export class BlogEditorView extends React.Component {
     }
 
     updateBlog(blog) {
-        console.log(blog);
         if(this.state.blog === undefined) {
             FeedService.createBlog(blog).then((data) => {
                 this.props.history.push('/');
@@ -69,7 +71,7 @@ export class BlogEditorView extends React.Component {
                 this.setState(Object.assign({}, this.state, {error: 'Error while creating blog'}));
             });
         } else {
-            MovieService.updateMovie(blog).then((data) => {
+            FeedService.updateBlog(this.state.blog._id,blog).then((data) => {
                 this.props.history.goBack();
             }).catch((e) => {
                 console.error(e);
@@ -80,13 +82,13 @@ export class BlogEditorView extends React.Component {
 
     render() {
         if (this.state.loading) {
-            return (<div></div>);
+            return (<div>asdasdas</div>);
         }
 
         return (
             <div>
                 <Header/>
-                <Editor blog={this.state.blog} user={this.state.user} onSubmit={(blog) => this.updateBlog(blog)} error={this.state.error} />
+                <Editor blog={this.state.blog} isNew={this.state.newFlag} user={this.state.user} onSubmit={(blog) => this.updateBlog(blog)} error={this.state.error} />
             </div>
         );
     }

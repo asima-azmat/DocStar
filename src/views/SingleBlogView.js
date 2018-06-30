@@ -50,6 +50,7 @@ export class SingleBlogView extends React.Component
     }
 
     addComment(comment){
+        console.log(comment);
         FeedService.addComment(comment).then((data) => {
                 window.location.reload(true);
             }).catch((e) => {

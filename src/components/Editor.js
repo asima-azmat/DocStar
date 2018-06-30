@@ -21,7 +21,7 @@ class Editor extends Component
 
     publishStory ()
     {
-        console.log('publishing...');
+        console.log('Publishing...');
         const blog = {};
         const text = this.state.text;
         const heading = document.getElementById('editor-title').value;
@@ -33,6 +33,8 @@ class Editor extends Component
     }
 
     componentDidMount () {
+        if (!this.props.isNew)
+            document.getElementById('editor-title').value=this.props.blog.blogHeading;
         const editor = new MediumEditor(/*dom, */".medium-editable",{
             autoLink: true,
             delay: 1000,
@@ -77,7 +79,7 @@ class Editor extends Component
             placeholder: {
                 text: 'Write your blog...'
             }
-        })
+        });
         editor.subscribe('editableInput', (ev, editable) => {
             if(typeof document !== 'undefined')
                 this.setState({
@@ -85,7 +87,9 @@ class Editor extends Component
                     text: editor.getContent(0),
                     description: `${editor.getContent(0).substring(0,30).toString()}...`
                 })
-        })
+        });
+        if (!this.props.isNew)
+            editor.setContent(this.props.blog.blogText,0);
     }
 
     getDoctorName(user)
