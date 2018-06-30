@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ReactiveBase, CategorySearch, SingleRange, ResultCard ,RangeSlider} from '@appbaseio/reactivesearch';
 import { Link} from 'react-router-dom';
 
-import './SearchView.css';
+//import './../assets/css/SearchView.css'
 
 import {
   DataSearch,

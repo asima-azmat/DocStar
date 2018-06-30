@@ -9,6 +9,7 @@ import { FeedView } from './views/FeedView';
 import { SingleBlogView } from './views/SingleBlogView';
 import { ProfileView } from './views/ProfileView';
 import { BlogEditorView } from './views/BlogEditorView';
+import { HomePageView } from './views/HomePageView';
 
 import SearchView  from './views/SearchView';
 
@@ -23,7 +24,8 @@ export default class App extends React.Component
         this.state = {
             title: 'DocStar App',
             routes: [
-                { component: FeedView , path: '/', exact: true},
+                { component: HomePageView , path: '/', exact: true},
+                { component: FeedView , path: '/blog', exact: true},
                 { component: ProfileView , path: '/doctor/:id', exact: true},
                 { render: (props) => {
                     if(UserService.isAuthenticated()) {
@@ -42,7 +44,7 @@ export default class App extends React.Component
                         }} , path: '/blog/:id/edit', exact: true},
                 { component: UserLoginView, path: '/login'},
                 { component: UserSignupView, path: '/register'},
-                  { component: SearchView, path: '/search'},
+                { component: SearchView, path: '/search'},
 
 
             ]
