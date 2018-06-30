@@ -134,7 +134,7 @@ export default class SearchView extends Component {
               onData={(res)=>(
                 {
 
-                  "title": <h3><Link to={`/doctor/${res.id}`}>{res.persons.firstName + " " + res.persons.lastName || " "}</Link></h3> ,
+                  "title": <h3><Link to={`/doctor/${res.id}`}>{res.firstName + " " + res.lastName || " "}</Link></h3> ,
                   "image" : "http://www.allwhitebackground.com/images/3/3313.jpg",
 
 
