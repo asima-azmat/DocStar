@@ -47,7 +47,7 @@ export default class SearchView extends Component {
                 style={{
                   padding: "5px",
                   marginTop: "40px",
-                  marginRight: "20px"
+                  marginRight: "50px"
                 }}
               />
 
@@ -67,6 +67,11 @@ export default class SearchView extends Component {
                   padding: "5px",
                   marginTop: "10px"
                 }}
+                style={{
+                  padding: "5px",
+                  marginTop: "40px",
+                  marginRight: "50px"
+                }}
               />
 
              
@@ -74,18 +79,33 @@ export default class SearchView extends Component {
   componentId="CitySensor"
   dataField="addres.city.keyword"
   title="Cities"
+  style={{
+                  padding: "5px",
+                  marginTop: "40px",
+                  marginRight: "50px"
+                }}
 />
 
 <MultiDropdownList
   componentId="PostCode"
   dataField="addres.postcode.keyword"
   title="Post Code"
+  style={{
+                  padding: "5px",
+                  marginTop: "40px",
+                  marginRight: "50px"
+                }}
 />
 
 <MultiDropdownList
   componentId="Country"
   dataField="addres.country.keyword"
   title="Country"
+  style={{
+                  padding: "5px",
+                  marginTop: "40px",
+                  marginRight: "50px"
+                }}
 />
 
 
@@ -93,6 +113,11 @@ export default class SearchView extends Component {
   componentId="Languages"
   dataField="languages.keyword"
   title="Languages"
+  style={{
+                  padding: "5px",
+                  marginTop: "40px",
+                  marginRight: "50px"
+                }}
 />
 
 
@@ -100,6 +125,11 @@ export default class SearchView extends Component {
   componentId="Specialization"
   dataField="doctorParams.qualification.keyword"
   title="Specialization"
+  style={{
+                  padding: "5px",
+                  marginTop: "40px",
+                  marginRight: "50px"
+                }}
 />
 
 
@@ -124,6 +154,11 @@ export default class SearchView extends Component {
                 interval={20}
                 react={{
                   and: ["DateRangeSensor"]
+                }}
+                style={{
+                  padding: "5px",
+                  marginTop: "40px",
+                  marginRight: "50px"
                 }}
               />
             </div>
@@ -157,7 +192,7 @@ export default class SearchView extends Component {
                 description: (
                   <div style={{ lineHeight: "18px" }}>
                     <h4>{res.address}</h4>
-                    <h3>Speciality</h3> {+" " + "★".repeat(res.age)}
+                    <h3>{res.doctorParams.q}</h3> {"★".repeat(res.age)}
                   </div>
                 )
               })}
