@@ -26,6 +26,7 @@ export default class App extends React.Component
             routes: [
                 { component: HomePageView , path: '/', exact: true},
                 { component: FeedView , path: '/blog', exact: true},
+                { component: SearchView, path: '/search', exact: true},
                 { component: ProfileView , path: '/doctor/:id', exact: true},
                 { render: (props) => {
                     if(UserService.isAuthenticated()) {
@@ -43,8 +44,7 @@ export default class App extends React.Component
                             return (<Redirect to={'/login'}/>)
                         }} , path: '/blog/:id/edit', exact: true},
                 { component: UserLoginView, path: '/login'},
-                { component: UserSignupView, path: '/register'},
-                { component: SearchView, path: '/search'},
+                { component: UserSignupView, path: '/register'}
 
 
             ]

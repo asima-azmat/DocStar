@@ -33,6 +33,7 @@ class KebabMenu extends React.Component {
     render() {
         return (
             <MenuButton
+                style={{border: 1+'px'}}
                 id={this.props.id}
                 icon
                 className={this.props.className}
