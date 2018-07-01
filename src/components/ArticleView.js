@@ -49,15 +49,14 @@ class ArticleView extends Component
 
     render()
     {
-        const { _id, blogText, feature_img, doctorId ,comments, blogHeading, createdAt} = this.props._article
+        const { _id, blogText, feature_img, doctorId ,comments, blogHeading, createdAt} = this.props._article;
 
-        let author_name, author_img, author_id
+        let author_name, author_img, author_id;
         if (doctorId)
         {
-            const { firstName, lastName, _id } = doctorId
-            author_name = firstName + ' ' + lastName
-            author_id = _id
-            author_img = _id
+            const { firstName, lastName, _id } = doctorId;
+            author_name = firstName + ' ' + lastName;
+            author_id = _id;
         }
 
         const CommentsVar = ({comments = []}) => (
@@ -76,10 +75,11 @@ class ArticleView extends Component
                 <div className="container-fluid main-container">
                     <div className="row animated fadeInUp" data-animation="fadeInUp-fadeOutDown">
                         <div id="main-post" className="col-xs-10 col-md-8 col-md-offset-2 col-xs-offset-1 main-content">
+                            {this.props.user && (this.props.user.id===author_id) ? [
                             <div className="pull-right">
-                                <Button floating primary onClick={() => this.props.history.push(`/blog/${_id}/edit`,this.props._article)}>edit</Button>&nbsp;
+                                <Button floating primary onClick={() => this.props.history.push({pathname: `/blog/${_id}/edit`,state : this.props._article})}>edit</Button>&nbsp;
                                 <Button floating secondary onClick={() => this.props.onDelete(_id)}>delete</Button>
-                            </div>
+                            </div> ] : [ <div/> ]}
                             <div className="post-metadata">
                                 <Avatar random>{author_name.substr(0,1)}</Avatar>
                                 <div className="post-info">
@@ -117,6 +117,7 @@ class ArticleView extends Component
                             </div>
                         </div>
                     </div>
+                    {this.props.user ? [
                     <Card style={style} className="md-block-centered">
                         <form onSubmit={this.handleCommentSubmit}>
                             <div className="md-full-width">
@@ -132,7 +133,7 @@ class ArticleView extends Component
                             <Button flat primary swapTheming type='submit' className="md-block-centered">Insert Comment</Button>
                             <AlertMessage className="md-row md-full-width" >{this.props.error ? `${this.props.error}` : ''}</AlertMessage>
                         </form>
-                    </Card>
+                    </Card> ] : [ <div/> ] }
                 </div>
             </div>
         );

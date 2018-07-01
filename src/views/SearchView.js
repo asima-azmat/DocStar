@@ -7,6 +7,7 @@ import {
   RangeSlider
 } from "@appbaseio/reactivesearch";
 import { Link } from "react-router-dom";
+import {Footer} from '../components/Footer'
 
 //import './../assets/css/SearchView.css'
 
@@ -25,17 +26,24 @@ export default class SearchView extends Component {
     console.log(event.target);
   }
 
+  componentWillMount() {
+    if (this.props.searchTerm != null) {
+      this.setState({
+        searchTerm: this.props.searchTerm
+      });
+    } else {
+    }
+  }
+
+
+
+
   render() {
     return (
       <div className="container">
         <ReactiveBase
           app="docsearch"
           credentials="0cchhVQ1S:c86f3050-ffeb-493d-b540-ccea2b52ccc1"
-
-
-
-
-
         >
           <div style={{ display: "flex", flexDirection: "row" }}>
             <div
@@ -44,6 +52,7 @@ export default class SearchView extends Component {
               <CategorySearch
                 componentId="namesearchbox"
                 dataField="firstName"
+                defaultSelected= {searchTerm}
                 placeholder="Search by name"
                 style={{
                   padding: "5px",
@@ -51,7 +60,6 @@ export default class SearchView extends Component {
                   marginRight: "50px"
                 }}
               />
-
 
               <SingleRange
                 componentId="ratingsfilter"
@@ -75,93 +83,62 @@ export default class SearchView extends Component {
                 }}
               />
 
-             
-<MultiDropdownList
-  componentId="CitySensor"
-  dataField="addres.city.keyword"
-  title="Cities"
-  style={{
-                  padding: "5px",
-                  marginTop: "40px",
-                  marginRight: "50px"
-                }}
-/>
-
-<MultiDropdownList
-  componentId="PostCode"
-  dataField="addres.postcode.keyword"
-  title="Post Code"
-  style={{
-                  padding: "5px",
-                  marginTop: "40px",
-                  marginRight: "50px"
-                }}
-/>
-
-<MultiDropdownList
-  componentId="Country"
-  dataField="addres.country.keyword"
-  title="Country"
-  style={{
-                  padding: "5px",
-                  marginTop: "40px",
-                  marginRight: "50px"
-                }}
-/>
-
-
-<MultiDropdownList
-  componentId="Languages"
-  dataField="languages.keyword"
-  title="Languages"
-  style={{
-                  padding: "5px",
-                  marginTop: "40px",
-                  marginRight: "50px"
-                }}
-/>
-
-
-<MultiDropdownList
-  componentId="Specialization"
-  dataField="doctorParams.qualification.keyword"
-  title="Specialization"
-  style={{
-                  padding: "5px",
-                  marginTop: "40px",
-                  marginRight: "50px"
-                }}
-/>
-
-
-
-              <RangeSlider
-                componentId="PriceSensor"
-                dataField="price"
-                title="Opening Hours"
-                range={{
-                  start: 10,
-                  end: 250
-                }}
-                rangeLabels={{
-                  start: "08:00",
-                  end: "15:00"
-                }}
-                defaultSelected={{
-                  start: 10,
-                  end: 50
-                }}
-                stepValue={10}
-                interval={20}
-                react={{
-                  and: ["DateRangeSensor"]
-                }}
+              <MultiDropdownList
+                componentId="CitySensor"
+                dataField="addres.city.keyword"
+                title="Cities"
                 style={{
                   padding: "5px",
                   marginTop: "40px",
                   marginRight: "50px"
                 }}
               />
+
+              <MultiDropdownList
+                componentId="PostCode"
+                dataField="addres.postcode.keyword"
+                title="Post Code"
+                style={{
+                  padding: "5px",
+                  marginTop: "40px",
+                  marginRight: "50px"
+                }}
+              />
+
+              <MultiDropdownList
+                componentId="Country"
+                dataField="addres.country.keyword"
+                title="Country"
+                style={{
+                  padding: "5px",
+                  marginTop: "40px",
+                  marginRight: "50px"
+                }}
+              />
+
+              <MultiDropdownList
+                componentId="Languages"
+                dataField="languages.keyword"
+                title="Languages"
+                style={{
+                  padding: "5px",
+                  marginTop: "40px",
+                  marginRight: "50px"
+                }}
+              />
+
+              <MultiDropdownList
+                componentId="Specialization"
+                dataField="doctorParams.qualification.keyword"
+                title="Specialization"
+                style={{
+                  padding: "5px",
+                  marginTop: "40px",
+                  marginRight: "50px"
+                }}
+              />
+
+
             </div>
             <ResultList
               componentId="results"
@@ -205,6 +182,7 @@ export default class SearchView extends Component {
             />
           </div>
         </ReactiveBase>
+          <Footer/>
       </div>
     );
   }

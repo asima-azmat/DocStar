@@ -38,7 +38,7 @@ class Feed extends Component {
                     <div className="main-body">
                         <h3 className="post-title"><Link to={`/blog/${article._id}`}>{article.blogHeading}</Link></h3>
                         <div className="post-body">
-                            <p className="" dangerouslySetInnerHTML={{__html: article.blogText.substr(0,100)+'...'}}></p>
+                            <p className="" dangerouslySetInnerHTML={{__html: article.blogDescription}}></p>
                         </div>
                         <div className="response-count pull-right">Comments: <Badge>{Feed.getNumberOfComments(article.comments)}</Badge></div>
                         <a className="read-more"><Link to={`/blog/${article._id}`}>Read more</Link></a>

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter, Link} from 'react-router-dom';
-import { Carousel, FormGroup, FormControl, Image} from 'react-bootstrap';
-import { Media, MediaOverlay, Grid, Cell, Button, Card, CardTitle, CardText, Avatar} from 'react-md';
+import { Image } from 'react-bootstrap';
+import { Grid, Cell, Button} from 'react-md';
 import img from './../assets/img/carousel3.jpg';
 import FeaturedBlog from '../components/FeaturedBlog';
+import FeaturedDoctor from '../components/FeaturedDoctor';
 import './../assets/css/Cell.css'
-import Rater, {Star} from 'react-rater'
 
 class HomePage extends Component
 {
@@ -17,14 +17,18 @@ class HomePage extends Component
 
     handleSearchSubmit(event)
     {
-        alert(event.target.searchBox.value);
+        const searchTerm = event.target.searchBox.value;
+        if (searchTerm.length>0)
+        {
+            this.props.history.push({pathname: `/search`,state : searchTerm})
+        }
     }
 
     render()
     {
         return (
             <div>
-                <Grid className="imageContainer">
+                <Grid className="imageContainer" style={{padding: 0+'px'}}>
                     <Image alt="HomeImage" src={img} responsive={true}/>
                     <div className="centeredSearchDiv">
                         <form onSubmit={this.handleSearchSubmit}>
@@ -35,19 +39,10 @@ class HomePage extends Component
                 </Grid>
                 <Grid>
                     <Cell size={4} className="cellClass" style={{margin: 2+'px'}}>4</Cell>
-                    <Cell size={4} className="cellClass" style={{margin: 2+'px'}}>
-                        <Card>
-                            <CardTitle title={this.props.fDoctor.firstName} subtitle={this.props.fDoctor.doctorParams.qualification} avatar={<Avatar random>{this.props.fDoctor.firstName.substr(0,1)}</Avatar>}/>
-                            <CardText>
-                                <Rater total={5} rating={this.props.fDoctor.doctorParams.reviews.rating} interactive={false}/>
-                                <p>
-                                    The <code>CardText</code> component is really just useful for displaying any
-                                    content with some additional padding.
-                                </p>
-                            </CardText>
-                        </Card>
+                    <Cell size={4}>
+                        <FeaturedDoctor fDoctor={this.props.fDoctor}/>
                     </Cell>
-                    <Cell size={4} className="cellClass" style={{margin: 2+'px'}}>
+                    <Cell size={4}>
                         <FeaturedBlog article={this.props.fBlog}/>
                     </Cell>
                 </Grid>
