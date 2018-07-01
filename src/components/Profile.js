@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Review from './Review';
+import AddReview from './AddReview'
 import Tabs from "react-bootstrap/es/Tabs";
 import Tab from "react-bootstrap/es/Tab";
 import TabContent from "react-bootstrap/es/TabContent";
-import Rater, {Star} from 'react-rater'
+import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
 import FormGroup from "react-bootstrap/es/FormGroup";
 import ControlLabel from "react-bootstrap/es/ControlLabel";
 import FormControl from "react-bootstrap/es/FormControl";
-import Button from "react-bootstrap/es/Button";
 import Row from "react-bootstrap/es/Row";
 import { withRouter} from 'react-router-dom';
 import './../assets/css/Profile.css';
@@ -84,29 +84,7 @@ function TabView () {
             </Tab>
             <Tab eventKey={2} title="Provide Review">
                 <TabContent>
-                <form>
-                <h4>Please provide your reviews about your last appointment with the doctor.</h4>
-                    <Rater total={5}>
-                        <Star/>
-                    </Rater>
-                    <FormGroup className = "FormGroupMargin" controlId="formHorizontal">
-                        <Row   className="FontStyle" componentClass={ControlLabel}>
-                            Summary
-                        </Row>
-                        <Row>
-                            <FormControl type="text" placeholder="Enter brief overview of your visit" />
-                        </Row>
-                    </FormGroup>
-                    <FormGroup className = "FormGroupMargin" controlId="formControlsTextarea">
-                        <Row  className="FontStyle" componentClass={ControlLabel}>
-                            Details
-                        </Row>
-                        <Row>
-                             <FormControl componentClass="textarea" placeholder="Explain your experience in detail." />
-                        </Row>
-                    </FormGroup>
-                    <Button type="submit">Submit</Button>
-                </form>
+                    <AddReview/>
                 </TabContent>
             </Tab>
             <Tab eventKey={3} title="Request Appointment">
