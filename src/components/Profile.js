@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Review from './Review';
-import AddReview from './AddReview'
 import Tabs from "react-bootstrap/es/Tabs";
 import Tab from "react-bootstrap/es/Tab";
 import TabContent from "react-bootstrap/es/TabContent";
