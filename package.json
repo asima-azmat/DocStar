@@ -34,14 +34,15 @@
     "webpack-merge": "4.1.0"
   },
   "dependencies": {
+    "@appbaseio/reactivesearch": "^2.3.2",
     "medium-editor": "^5.23.3",
     "react": "16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-bootstrap-date-picker": "^5.1.0",
     "react-bootstrap-datetimepicker": "0.0.22",
+    "react-bootstrap-validation": "^0.1.11",
     "react-dom": "16.2.0",
     "react-hot-loader": "next",
-    "@appbaseio/reactivesearch": "^2.3.2",
     "react-materialize": "^2.3.1",
     "react-md": "1.2.11",
     "react-rater": "^5.0.1",
