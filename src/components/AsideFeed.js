@@ -59,7 +59,6 @@ class AsideFeed extends Component
                         </ul>
                     </div>
                 </aside>
-                <Button floating secondary className="pull-left">edit</Button>
             </div>
         )
     }

@@ -3,6 +3,7 @@
 import React from 'react';
 
 import ArticleView from '../components/ArticleView';
+import Header from '../components/HeaderNav';
 
 import FeedService from '../services/FeedService';
 
@@ -14,6 +15,11 @@ export class SingleBlogView extends React.Component
     constructor(props) 
     {
         super(props);
+        this.state =
+        {
+            loading: false,
+            blog: []
+        };
     }
 
     componentWillMount()
@@ -44,6 +50,7 @@ export class SingleBlogView extends React.Component
     }
 
     addComment(comment){
+        console.log(comment);
         FeedService.addComment(comment).then((data) => {
                 window.location.reload(true);
             }).catch((e) => {
@@ -55,12 +62,15 @@ export class SingleBlogView extends React.Component
     render() {
         if (this.state.loading) 
         {
-            return (<h2>Loading...</h2>);
+            return (<div></div>);
         }
 
         return (
-            <ArticleView _article={this.state.blog} onDelete={(id) => this.deleteBlog(id)} 
-            insertComment={(comment) => this.addComment(comment)} error={this.state.error}/>
+            <div>
+                <Header/>
+                <ArticleView _article={this.state.blog} onDelete={(id) => this.deleteBlog(id)}
+                insertComment={(comment) => this.addComment(comment)} error={this.state.error}/>
+            </div>
         );
     }
 }

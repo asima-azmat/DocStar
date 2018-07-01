@@ -62,9 +62,9 @@ export default class FeedService
         });
     }
 
-    static updateMovie(movie) {
+    static updateBlog(id,blog) {
         return new Promise((resolve, reject) => {
-            HttpService.put(`${this.baseURL()}/${movie._id}`, movie, function(data) {
+            HttpService.put(`${FeedService.baseURL()}/${id}`, blog, function(data) {
                 resolve(data);
             }, function(textStatus) {
                reject(textStatus);
@@ -72,17 +72,26 @@ export default class FeedService
         });
     }
 
-    static createMovie(movie) {
-        movie.id = Math.floor((Math.random() * 100000000) + 1).toString();
-        movie.posters = {
-            thumbnail: "http://resizing.flixster.com/AeDB8hgaGed_TMCcIF1P_gubGwA=/54x81/dkpu1ddg7pbsk.cloudfront.net/movie/11/27/63/11276344_ori.jpg",
-            profile: "http://resizing.flixster.com/AeDB8hgaGed_TMCcIF1P_gubGwA=/54x81/dkpu1ddg7pbsk.cloudfront.net/movie/11/27/63/11276344_ori.jpg",
-            detailed: "http://resizing.flixster.com/AeDB8hgaGed_TMCcIF1P_gubGwA=/54x81/dkpu1ddg7pbsk.cloudfront.net/movie/11/27/63/11276344_ori.jpg",
-            original: "http://resizing.flixster.com/AeDB8hgaGed_TMCcIF1P_gubGwA=/54x81/dkpu1ddg7pbsk.cloudfront.net/movie/11/27/63/11276344_ori.jpg"
-        };
+    static createBlog(blog)
+    {
         return new Promise((resolve, reject) => {
-            HttpService.post(MovieService.baseURL(), movie, function(data) {
+            HttpService.post(`${FeedService.baseURL()}/create`, blog, function(data) {
                 resolve(data);
+            }, function(textStatus) {
+                reject(textStatus);
+            });
+        });
+    }
+
+    static getFeaturedBlog() {
+        return new Promise((resolve, reject) => {
+            HttpService.get(`${FeedService.baseURL()}/featured`, function(data) {
+                if(data != undefined || Object.keys(data).length !== 0) {
+                    resolve(data);
+                }
+                else {
+                    reject('Error while retrieving featured blog');
+                }
             }, function(textStatus) {
                 reject(textStatus);
             });

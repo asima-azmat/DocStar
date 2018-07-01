@@ -25,7 +25,7 @@ export default class UserService {
     static login(user, pass) {
         return new Promise((resolve, reject) => {
             HttpService.post(`${UserService.baseURL()}/login`, {
-                username: user,
+                email: user,
                 password: pass
             }, function(data) {
                 resolve(data);
@@ -47,8 +47,26 @@ export default class UserService {
         let base64 = base64Url.replace('-', '+').replace('_', '/');
         return {
             id : JSON.parse(window.atob(base64)).id,
-            username: JSON.parse(window.atob(base64)).username
+            username: JSON.parse(window.atob(base64)).email
         };
+    }
+
+    static getCurrentUserDetails()
+    {
+        const userCreds = this.getCurrentUser();
+        if (userCreds.id != null)
+        {
+            return new Promise((resolve, reject) => {
+                HttpService.get(`${UserService.baseURL()}/me`, function(data) {
+                    resolve(data);
+                }, function(textStatus) {
+                    reject(textStatus);
+                });
+            });
+        }
+        else {
+
+        }
     }
 
     static isAuthenticated() {
