@@ -23,7 +23,7 @@ class Header extends Component
                 </Navbar.Header>
                 <Nav pullRight>
                     {this.state.user ?
-                        [<Navbar.Text>Signed in as: {this.state.user.username}</Navbar.Text>] :
+                        [<Navbar.Text>Signed in as: {this.state.user.username.substr(0, this.state.user.username.indexOf('@'))}</Navbar.Text>] :
                         [<Navbar.Text>You're not Signed In</Navbar.Text>]
                     }
                     <KebabMenu id="toolbar-transparent-kebab-menu" />

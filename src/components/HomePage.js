@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter, Link} from 'react-router-dom';
 import { Carousel, FormGroup, FormControl, Image} from 'react-bootstrap';
-import { Media, MediaOverlay, Grid, Cell, Button} from 'react-md';
+import { Media, MediaOverlay, Grid, Cell, Button, Card, CardTitle, CardText, Slider} from 'react-md';
 import img from './../assets/img/carousel3.jpg';
 import FeaturedBlog from '../components/FeaturedBlog';
 import './../assets/css/Cell.css'
+import Rater, {Star} from 'react-rater'
 
 class HomePage extends Component
 {
@@ -34,7 +35,19 @@ class HomePage extends Component
                 </Grid>
                 <Grid>
                     <Cell size={4} className="cellClass" style={{margin: 2+'px'}}>4</Cell>
-                    <Cell size={4} className="cellClass" style={{margin: 2+'px'}}>4</Cell>
+                    <Cell size={4} className="cellClass" style={{margin: 2+'px'}}>
+                        <Card>
+                            <CardTitle title={this.props.fDoctor.firstName} subtitle={this.props.fDoctor.doctorParams.qualification} />
+                            <CardText>
+                                <Rater total={5} rating={this.props.fDoctor.doctorParams.reviews.rating} interactive={false}/>
+                                <p>
+                                    The <code>CardText</code> component is really just useful for displaying any
+                                    content with some additional padding.
+                                </p>
+                                <Slider id="example-card-slider" />
+                            </CardText>
+                        </Card>
+                    </Cell>
                     <Cell size={4} className="cellClass" style={{margin: 2+'px'}}>
                         <FeaturedBlog/>
                     </Cell>
