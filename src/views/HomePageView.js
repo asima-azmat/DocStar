@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import Feed from '../components/Feed';
+import HomePage from '../components/HomePage';
 import Header from '../components/HeaderNav';
 
 import FeedService from '../services/FeedService';
@@ -46,7 +46,7 @@ export class HomePageView extends React.Component
         return (
             <div>
                 <Header/>
-                {/*<Feed articles={this.state.data}/>*/}
+                <HomePage/>
             </div>
         );
     }
