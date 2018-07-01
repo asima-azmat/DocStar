@@ -3,7 +3,6 @@ import Review from './Review';
 import Tabs from "react-bootstrap/es/Tabs";
 import Tab from "react-bootstrap/es/Tab";
 import TabContent from "react-bootstrap/es/TabContent";
-import Table from "react-bootstrap/es/Table";
 import Rater, {Star} from 'react-rater'
 import 'react-rater/lib/react-rater.css'
 import FormGroup from "react-bootstrap/es/FormGroup";
@@ -12,7 +11,7 @@ import FormControl from "react-bootstrap/es/FormControl";
 import Button from "react-bootstrap/es/Button";
 import Row from "react-bootstrap/es/Row";
 import { withRouter} from 'react-router-dom';
-
+import './../assets/css/Profile.css';
 
 class Profile extends Component {
 
@@ -31,6 +30,18 @@ class Profile extends Component {
         return doctor.firstName + ' ' + doctor.lastName;
     }
 
+    static getLanguage(doctor){
+        const languages = doctor.languages;
+        const lang = languages.map((language) => language + ', ');
+        return lang;
+    }
+
+    static getOpeningHours(doctor){
+        const openingHours = doctor.doctorParams.openingHours;
+        const hrs = openingHours.map((openingHour) => openingHour + ', ');
+        return hrs;
+    }
+
     render() {
 
         return (
@@ -46,12 +57,15 @@ function ItemList (props) {
     return <div className="container container-fluid">
         <div className="row">
             <div className="col-md-6 col-md-offset-2">
-                <h2>{Profile.giveDoctorName(props.doctor)}</h2>
-                <h3>Specialty</h3>
-                <Rater total={5} rating={4} interactive={false}/>
+                <h1>{Profile.giveDoctorName(props.doctor)}</h1>
+                <h6>{props.doctor.doctorParams.qualification}, {props.doctor.doctorParams.experience}</h6>
+                <h6>Address: {props.doctor.address}</h6>
+                <h6>Phone No: {props.doctor.phoneNo}</h6>
+                <h6>Languages: {Profile.getLanguage(props.doctor)}</h6>
+                <h6><b>Opening Hours: {Profile.getOpeningHours(props.doctor)}</b></h6>
             </div>
             <div className="col-md-2" style={{marginTop: 3 + 'em'}}>
-                {/*<img src={Doctor} className="img-responsive" alt="Doctor Profile Picture"/>*/}
+                <Rater total={5} rating={4} interactive={false}/>
             </div>
         </div>
     </div>
