@@ -6,6 +6,7 @@ import HomePage from '../components/HomePage';
 import Header from '../components/HeaderNav';
 
 import DoctorService from '../services/DoctorService';
+import FeedService from '../services/FeedService'
 
 import './../assets/css/medium.css';
 
@@ -19,7 +20,8 @@ export class HomePageView extends React.Component
         this.state =
             {
                 loading: false,
-                fDoctor: []
+                fDoctor: [],
+                fBlog: []
             };
     }
 
@@ -30,6 +32,14 @@ export class HomePageView extends React.Component
         DoctorService.getHighestRatedDoctor().then((data) => {
             this.setState({
                 fDoctor: data,
+            });
+        }).catch((e) => {
+            console.error(e);
+        });
+
+        FeedService.getFeaturedBlog().then((data) => {
+            this.setState({
+                fBlog: data,
                 loading: false
             });
         }).catch((e) => {
@@ -46,7 +56,7 @@ export class HomePageView extends React.Component
         return (
             <div>
                 <Header/>
-                <HomePage fDoctor={this.state.fDoctor}/>
+                <HomePage fDoctor={this.state.fDoctor} fBlog={this.state.fBlog}/>
             </div>
         );
     }

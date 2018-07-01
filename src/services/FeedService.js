@@ -82,4 +82,19 @@ export default class FeedService
             });
         });
     }
+
+    static getFeaturedBlog() {
+        return new Promise((resolve, reject) => {
+            HttpService.get(`${FeedService.baseURL()}/featured`, function(data) {
+                if(data != undefined || Object.keys(data).length !== 0) {
+                    resolve(data);
+                }
+                else {
+                    reject('Error while retrieving featured blog');
+                }
+            }, function(textStatus) {
+                reject(textStatus);
+            });
+        });
+    }
 }
