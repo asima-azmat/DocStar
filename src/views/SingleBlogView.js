@@ -8,6 +8,7 @@ import Header from '../components/HeaderNav';
 import FeedService from '../services/FeedService';
 
 import './../assets/css/medium.css';
+import UserService from "../services/UserService";
 
 
 export class SingleBlogView extends React.Component 
@@ -33,6 +34,7 @@ export class SingleBlogView extends React.Component
 
         FeedService.getBlog(id).then((data) => {
             this.setState({
+                user: UserService.isAuthenticated() ? UserService.getCurrentUser() : undefined,
                 blog: data,
                 loading: false
             });
@@ -43,7 +45,7 @@ export class SingleBlogView extends React.Component
 
     deleteBlog(id) {
         FeedService.deleteBlog(id).then((message) => {
-            this.props.history.push('/');
+            this.props.history.push('/blog');
         }).catch((e) => {
             console.log(e);
         });
@@ -68,7 +70,7 @@ export class SingleBlogView extends React.Component
         return (
             <div>
                 <Header/>
-                <ArticleView _article={this.state.blog} onDelete={(id) => this.deleteBlog(id)}
+                <ArticleView _article={this.state.blog} user={this.state.user} onDelete={(id) => this.deleteBlog(id)}
                 insertComment={(comment) => this.addComment(comment)} error={this.state.error}/>
             </div>
         );

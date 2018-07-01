@@ -29,6 +29,7 @@ class Editor extends Component
             return;
         blog.blogText = text;
         blog.blogHeading = heading;
+        blog.blogDescription = text.substr(0,(text.length>100)?100:text.length)+"...";
         this.props.onSubmit(blog);
     }
 

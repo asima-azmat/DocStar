@@ -22,12 +22,13 @@ class KebabMenu extends React.Component {
         this.state = {
             user: UserService.isAuthenticated() ? UserService.getCurrentUser() : undefined
         };
-        if(this.props.location.pathname != '/') {
+        window.location.reload();
+        /*if(this.props.location.pathname != '/') {
             this.props.history.push('/');
         }
         else {
             window.location.reload();
-        }
+        }*/
     }
 
     render() {
