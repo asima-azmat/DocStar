@@ -38,11 +38,11 @@ class HomePage extends Component
                     </div>
                 </Grid>
                 <Grid>
-                    <Cell size={4} className="cellClass" style={{margin: 2+'px'}}>4</Cell>
-                    <Cell size={4}>
+                    {/*<Cell size={4} className="cellClass" style={{margin: 2+'px'}}>Location Pins</Cell>*/}
+                    <Cell size={6}>
                         <FeaturedDoctor fDoctor={this.props.fDoctor}/>
                     </Cell>
-                    <Cell size={4}>
+                    <Cell size={6}>
                         <FeaturedBlog article={this.props.fBlog}/>
                     </Cell>
                 </Grid>

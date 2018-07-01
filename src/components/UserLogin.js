@@ -54,7 +54,7 @@ class UserLogin extends React.Component {
                         <TextField
                             label="Login"
                             id="LoginField"
-                            type="text"
+                            type="email"
                             className="md-row"
                             required={true}
                             value={this.state.username}
