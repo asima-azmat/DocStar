@@ -7,7 +7,8 @@ import {
   RangeSlider
 } from "@appbaseio/reactivesearch";
 import { Link } from "react-router-dom";
-import {Footer} from '../components/Footer'
+import {Footer} from '../components/Footer';
+import Header from '../components/HeaderNav';
 
 //import './../assets/css/SearchView.css'
 
@@ -16,6 +17,7 @@ import {
   MultiList,
   MultiDataList,
   SelectedFilters,
+  SingleDropdownList,
   MultiDropdownList,
   ResultList
 } from "@appbaseio/reactivesearch";
@@ -27,11 +29,15 @@ export default class SearchView extends Component {
   }
 
   componentWillMount() {
-    if (this.props.searchTerm != null) {
+     if(this.props.location.state != undefined) {
       this.setState({
-        searchTerm: this.props.searchTerm
+        searchTerm: this.props.location.state
       });
-    } else {
+    } else 
+    {
+ this.setState({
+        searchTerm: ""
+      });
     }
   }
 
@@ -41,6 +47,7 @@ export default class SearchView extends Component {
   render() {
     return (
       <div className="container">
+      <Header/>
         <ReactiveBase
           app="docsearch"
           credentials="0cchhVQ1S:c86f3050-ffeb-493d-b540-ccea2b52ccc1"
@@ -52,7 +59,7 @@ export default class SearchView extends Component {
               <CategorySearch
                 componentId="namesearchbox"
                 dataField="firstName"
-                defaultSelected= {searchTerm}
+                defaultSelected= {this.state.searchTerm}
                 placeholder="Search by name"
                 style={{
                   padding: "5px",
@@ -71,7 +78,7 @@ export default class SearchView extends Component {
                   { start: "2", end: "5", label: "2 stars and up" },
                   { start: "1", end: "5", label: "see all ratings" }
                 ]}
-                defaultSelected="4 stars and up"
+                defaultSelected="see all ratings"
                 style={{
                   padding: "5px",
                   marginTop: "10px"
@@ -127,9 +134,9 @@ export default class SearchView extends Component {
                 }}
               />
 
-              <MultiDropdownList
+              <SingleDropdownList
                 componentId="Specialization"
-                dataField="doctorParams.qualification.keyword"
+                dataField="doctorParams.specialization.keyword"
                 title="Specialization"
                 style={{
                   padding: "5px",
@@ -166,7 +173,7 @@ export default class SearchView extends Component {
                     </Link>
                   </h3>
                 ),
-                image: "http://www.allwhitebackground.com/images/3/3313.jpg",
+                image: `https://ui-avatars.com/api/?background=0D8ABC&color=fff&size=160&name=${res.firstName}+${res.lastName}`,
                 description: (
                   <div style={{ lineHeight: "18px" }}>
                     <h4>{res.address}</h4>
@@ -179,7 +186,9 @@ export default class SearchView extends Component {
                 image: "result-image",
                 resultStats: "result-stats"
               }}
-            />
+        style={{
+                  marginTop: "40px",
+                }}            />
           </div>
         </ReactiveBase>
           <Footer/>
