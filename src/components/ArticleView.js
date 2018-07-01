@@ -49,15 +49,14 @@ class ArticleView extends Component
 
     render()
     {
-        const { _id, blogText, feature_img, doctorId ,comments, blogHeading, createdAt} = this.props._article
+        const { _id, blogText, feature_img, doctorId ,comments, blogHeading, createdAt} = this.props._article;
 
-        let author_name, author_img, author_id
+        let author_name, author_img, author_id;
         if (doctorId)
         {
-            const { firstName, lastName, _id } = doctorId
-            author_name = firstName + ' ' + lastName
-            author_id = _id
-            author_img = _id
+            const { firstName, lastName, _id } = doctorId;
+            author_name = firstName + ' ' + lastName;
+            author_id = _id;
         }
 
         const CommentsVar = ({comments = []}) => (

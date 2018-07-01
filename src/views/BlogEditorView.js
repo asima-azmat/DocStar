@@ -5,7 +5,6 @@ import React from 'react';
 import Editor from './../components/Editor';
 import Header from '../components/HeaderNav';
 
-import MovieService from '../services/MovieService';
 import FeedService from '../services/FeedService';
 import UserService from '../services/UserService';
 

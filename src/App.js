@@ -30,7 +30,13 @@ export default class App extends React.Component
                 { component: ProfileView , path: '/doctor/:id', exact: true},
                 { render: (props) => {
                     if(UserService.isAuthenticated()) {
-                        return (<BlogEditorView {... props} />)
+                        if (UserService.getCurrentUser().isDoctor) {
+                            return (<BlogEditorView {...props} />)
+                        }
+                        else
+                        {
+                            return (<Redirect to={'/'}/>)
+                        }
                     }
                     else {
                         return (<Redirect to={'/login'}/>)
@@ -38,7 +44,13 @@ export default class App extends React.Component
                 { component: SingleBlogView , path: '/blog/:id', exact:true},
                 { render: (props) => {
                         if(UserService.isAuthenticated()) {
-                            return (<BlogEditorView {... props} />)
+                            if (UserService.getCurrentUser().isDoctor) {
+                                return (<BlogEditorView {...props} />)
+                            }
+                            else
+                            {
+                                return (<Redirect to={'/'}/>)
+                            }
                         }
                         else {
                             return (<Redirect to={'/login'}/>)
