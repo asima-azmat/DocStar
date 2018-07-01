@@ -12,9 +12,9 @@ class PlainFooter extends React.Component {
 
     render() {
         return (
-            <div className={this.props.className}>
+            <div className="md-text-center">
                 <hr/>
-                <p>© {new Date().getFullYear()} sebis. All rights reserved.</p>
+                <p>© {new Date().getFullYear()} docstar. All rights reserved.</p>
             </div>
         );
     }

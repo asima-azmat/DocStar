@@ -4,6 +4,7 @@ import React from 'react';
 
 import Feed from '../components/Feed';
 import Header from '../components/HeaderNav';
+import {Footer} from '../components/Footer'
 
 import FeedService from '../services/FeedService';
 
@@ -47,6 +48,7 @@ export class FeedView extends React.Component
             <div>
                 <Header/>
                 <Feed articles={this.state.data}/>
+                <Footer/>
             </div>
         );
     }

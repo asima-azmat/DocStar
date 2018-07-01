@@ -7,6 +7,7 @@ import {
   RangeSlider
 } from "@appbaseio/reactivesearch";
 import { Link } from "react-router-dom";
+import {Footer} from '../components/Footer'
 
 //import './../assets/css/SearchView.css'
 
@@ -205,6 +206,7 @@ export default class SearchView extends Component {
             />
           </div>
         </ReactiveBase>
+          <Footer/>
       </div>
     );
   }

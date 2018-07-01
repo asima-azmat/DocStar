@@ -77,7 +77,7 @@ class ArticleView extends Component
                         <div id="main-post" className="col-xs-10 col-md-8 col-md-offset-2 col-xs-offset-1 main-content">
                             {this.props.user && (this.props.user.id===author_id) ? [
                             <div className="pull-right">
-                                <Button floating primary onClick={() => this.props.history.push(`/blog/${_id}/edit`,this.props._article)}>edit</Button>&nbsp;
+                                <Button floating primary onClick={() => this.props.history.push({pathname: `/blog/${_id}/edit`,state : this.props._article})}>edit</Button>&nbsp;
                                 <Button floating secondary onClick={() => this.props.onDelete(_id)}>delete</Button>
                             </div> ] : [ <div/> ]}
                             <div className="post-metadata">

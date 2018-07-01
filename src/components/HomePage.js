@@ -17,7 +17,11 @@ class HomePage extends Component
 
     handleSearchSubmit(event)
     {
-        alert(event.target.searchBox.value);
+        const searchTerm = event.target.searchBox.value;
+        if (searchTerm.length>0)
+        {
+            this.props.history.push({pathname: `/search`,state : searchTerm})
+        }
     }
 
     render()

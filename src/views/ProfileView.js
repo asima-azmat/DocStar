@@ -4,6 +4,7 @@ import React from 'react';
 
 import Profile from '../components/Profile';
 import Header from '../components/HeaderNav';
+import {Footer} from '../components/Footer'
 
 import './../assets/css/medium.css';
 import DoctorService from "../services/DoctorService";
@@ -44,6 +45,7 @@ export class ProfileView extends React.Component
             <div>
                 <Header/>
                 <Profile doctor={this.state.doctor}/>
+                <Profile/>
             </div>
         );0
     }
