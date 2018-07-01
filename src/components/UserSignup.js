@@ -1,16 +1,8 @@
 "use strict";
 
 import React from "react";
-import { Card, Button, TextField } from "react-md";
+import { Card, Button, TextField, SelectionControlGroup, ExpansionPanel, SelectionControl, SelectField } from "react-md";
 import { withRouter } from "react-router-dom";
-import {
-  Form,
-  FormGroup,
-  ControlLabel,
-  FormControl,
-  Checkbox,
-  Radio
-} from "react-bootstrap";
 
 import { AlertMessage } from "./AlertMessage";
 import Page from "./Page";
@@ -18,305 +10,347 @@ import Page from "./Page";
 const style = { maxWidth: 500 };
 
 class UserSignup extends React.Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      value: "",
-      username: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-      gender: "",
-      addressline: "",
-      postcode: "",
-      city: "",
-      country: "",
-      phoneNo: "",
-      age: "",
-      languages: [],
+        this.state = {
+            email: "",
+            password: "",
+            firstName: "",
+            lastName: "",
+            gender: "Male",
+            addressline: "",
+            postcode: "",
+            city: "",
+            country: "",
+            phoneNo: "",
+            age: "",
+            languages: [],
+            isDoctor: false,
 
-      specialization: {},
-      experience: "",
-      isPremium: "",
-      reviews: {},
-      opening: "",
-      closing: ""
-    };
+            specialization: "Dentist",
+            experience: "",
+            isPremium: "",
+            reviews: {},
+            opening: new Date(),
+            closing: new Date()
+        };
 
-    this.handleChangeUsername = this.handleChangeUsername.bind(this);
-    this.handleChangePassword = this.handleChangePassword.bind(this);
-    this.handleChangefirstName = this.handleChangefirstName.bind(this);
-    this.handleChangelastName = this.handleChangelastName.bind(this);
-    this.handleChangeAge = this.handleChangeAge.bind(this);
-    this.handleChangeAddress = this.handleChangeAddress.bind(this);
-    this.handleChangePhone = this.handleChangePhone.bind(this);
-    this.handleChangegender = this.handleChangePhone.bind(this);
-    this.handleChangeaddressline = this.handleChangePhone.bind(this);
-    this.handleChangepostcode = this.handleChangePhone.bind(this);
-    this.handleChangecity = this.handleChangePhone.bind(this);
-    this.handleChangelanguages = this.handleChangePhone.bind(this);
-    this.handleChangeexperience = this.handleChangePhone.bind(this);
-    this.handleChangeopening = this.handleChangePhone.bind(this);
-    this.handleChangeclosing = this.handleChangePhone.bind(this);
+        this.handleChangeEmail = this.handleChangeEmail.bind(this);
+        this.handleChangePassword = this.handleChangePassword.bind(this);
+        this.handleChangefirstName = this.handleChangefirstName.bind(this);
+        this.handleChangelastName = this.handleChangelastName.bind(this);
+        this.handleChangeGender = this.handleChangeGender.bind(this);
+        this.handleChangeAddressLine = this.handleChangeAddressLine.bind(this);
+        this.handleChangePostCode = this.handleChangePostCode.bind(this);
+        this.handleChangeCountry = this.handleChangeCountry.bind(this);
+        this.handleChangeCity = this.handleChangeCity.bind(this);
+        this.handleChangeAge = this.handleChangeAge.bind(this);
+        this.handleChangePhoneNumber = this.handleChangePhoneNumber.bind(this);
+        this.handleChangeIsDoctor = this.handleChangeIsDoctor.bind(this);
+        this.handleChangeExperience = this.handleChangeExperience.bind(this);
+        this.handleChangeSpecialization = this.handleChangeSpecialization.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+    getValidationState() {
+        const length = this.state.value.length;
+        if (length > 10) return "success";
+        else if (length > 5) return "warning";
+        else if (length > 0) return "error";
+        return null;
+    }
 
-  getValidationState() {
-    const length = this.state.value.length;
-    if (length > 10) return "success";
-    else if (length > 5) return "warning";
-    else if (length > 0) return "error";
-    return null;
-  }
+    handleChangeEmail(value) {
+        this.setState(Object.assign({}, this.state, { email: value }));
+    }
 
-  handleChangeUsername(value) {
-    this.setState(Object.assign({}, this.state, { username: value }));
-  }
+    handleChangePassword(value) {
+        this.setState(Object.assign({}, this.state, { password: value }));
+    }
 
-  handleChangePassword(value) {
-    this.setState(Object.assign({}, this.state, { password: value }));
-  }
+    handleChangefirstName(value) {
+        this.setState(Object.assign({}, this.state, { firstName: value }));
+    }
 
-  handleChangefirstName(e) {
-    this.setState({ firstName: e.target.value });
-  }
+    handleChangelastName(value) {
+        this.setState(Object.assign({}, this.state, { lastName: value }));
+    }
 
-  handleChangelastName(e) {
-    this.setState({ lastName: e.target.value });
-  }
+    handleChangeGender(value) {
+        this.setState(Object.assign({}, this.state, { gender: value }));
+    }
 
-  handleChangePhone(e) {
-    this.setState({ phoneNo: e.target.value });
-  }
+    handleChangeAddressLine(value) {
+        this.setState(Object.assign({}, this.state, { addressline: value }));
+    }
 
-  handleChangeAddress(e) {
-    this.setState({ address: e.target.value });
-  }
+    handleChangePostCode(value) {
+        this.setState(Object.assign({}, this.state, { postcode: value }));
+    }
 
-  handleChangeAge(e) {
-    this.setState({ age: e.target.value });
-  }
+    handleChangeCountry(value) {
+        this.setState(Object.assign({}, this.state, { country: value }));
+    }
 
-  handleChangegender(e) {
-    this.setState({ gender: e.target.value });
-  }
+    handleChangeCity(value) {
+        this.setState(Object.assign({}, this.state, { city: value }));
+    }
 
-  handleChangeaddressline(e) {
-    this.setState({ addressline: e.target.value });
-  }
+    handleChangeAge(value) {
+        this.setState(Object.assign({}, this.state, { age: value }));
+    }
 
-  handleChangepostcode(e) {
-    this.setState({ postcode: e.target.value });
-  }
-  handleChangelanguages(e) {
-    this.setState({ languages: e.target.value });
-  }
-  handleChangeexperience(e) {
-    this.setState({ experience: e.target.value });
-  }
-  handleChangeopening(e) {
-    this.setState({ opening: e.target.value });
-  }
-  handleChangeclosing(e) {
-    this.setState({ closing: e.target.value });
-  }
+    handleChangePhoneNumber(value) {
+        this.setState(Object.assign({}, this.state, { phoneNo: value }));
+    }
 
-  handleChange(e) {
-    this.setState({ value: e.target.value });
-  }
+    handleChangeIsDoctor(value) {
+        this.setState(Object.assign({}, this.state, { isDoctor: value }));
+    }
 
-  handleSubmit(event) {
-    event.preventDefault();
+    handleChangeExperience(value) {
+        this.setState(Object.assign({}, this.state, { experience: value }));
+    }
 
-    let user = {
-      username: this.state.username,
-      password: this.state.password,
+    handleChangeSpecialization(value) {
+        this.setState(Object.assign({}, this.state, { specialization: value }));
+    }
 
-      profileData: {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        gender: this.state.gender,
-        address: {
-          addressline: this.state.address,
-          postcode: this.state.postcode,
-          city: this.state.password,
-          country: this.state.country
-        },
+    handleSubmit(event) {
+        const user = {
+            email: this.state.email,
+            password: this.state.password,
 
-        phoneNo: this.state.phoneNo,
-        age: this.state.age,
-        languages: [],
-        isDoctor: "",
+            profileData: {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                gender: this.state.gender,
+                address: {
+                    addressline: this.state.addressline,
+                    postcode: this.state.postcode,
+                    city: this.state.city,
+                    country: this.state.country
+                },
 
-        doctorParams: {
-          specialization: {},
-          experience: this.state.experience,
-          isPremium: "",
-          reviews: {},
-          openingHours: [
-            {
-              opening: "",
-              closing: ""
+                phoneNo: this.state.phoneNo,
+                age: this.state.age,
+                languages: [],
+                isDoctor: this.state.isDoctor,
+
+                doctorParams: {
+                    specialization: this.state.specialization,
+                    experience: this.state.experience,
+                    isPremium: false,
+                    reviews: {
+                        rating: 0,
+                        count: 0,
+                        reviewArr: []
+                    },
+                    openingHours: {
+                            opening: this.state.opening,
+                            closing: this.state.closing
+                    }
+                }
             }
-          ]
-        }
-      }
-    };
-    console.log(user);
+        };
 
-    this.props.onSubmit(user);
-  }
+        this.props.onSubmit(user);
+    }
 
-  render() {
-    return (
-      <Page>
-        <Card style={style} className="md-block-centered">
-          <form
-            className="md-grid"
-            onSubmit={this.handleSubmit}
-            onReset={() => this.props.history.goBack()}
-          >
-            <TextField
-              label="Username"
-              id="UsernameField"
-              type="text"
-              className="md-row"
-              required={true}
-              value={this.state.username}
-              onChange={this.handleChangeUsername}
-              errorText="Username is required"
-            />
-            <TextField
-              label="Password"
-              id="PasswordField"
-              type="password"
-              className="md-row"
-              required={true}
-              value={this.state.password}
-              onChange={this.handleChangePassword}
-              errorText="Password is required"
-            />
+    shouldBeDisabled()
+    {
+        if (this.state.email == undefined || this.state.email == "" || this.state.password == undefined || this.state.password == ""
+            || this.state.firstName == undefined || this.state.firstName == "" || this.state.lastName == undefined || this.state.lastName == ""
+            || this.state.age == undefined || this.state.age == "" || this.state.age <= 0 || this.state.addressline == undefined || this.state.addressline == ""
+            || this.state.postcode == undefined || this.state.postcode == "" || this.state.city == undefined || this.state.city == ""
+            || this.state.country == undefined || this.state.country == "" || this.state.addressline == undefined || this.state.addressline == "")
+            return true;
+        if (this.state.isDoctor && (this.state.experience == undefined || this.state.experience == "" || this.state.specialization == undefined || this.state.specialization == ""))
+            return true;
+        return false;
+    }
 
-            <form>
-              <FormGroup
-                controlId="formBasicText"
-                validationState={this.getValidationState()}
-              >
-                <FormControl
-                  type="text"
-                  value={this.state.value}
-                  placeholder="Enter text"
-                  onChange={this.handleChange}
-                />
+    render() {
+        const Specialization_ITEMS = ["Dentist","Orthopedic","General Physician","Surgeon"];
+        return (
+            <Page>
+                <Card style={style} className="md-block-centered">
+                    <form
+                        className="md-grid"
+                        onSubmit={this.handleSubmit}
+                        onReset={() => this.props.history.goBack()}
+                    >
+                        <TextField
+                            label="First Name"
+                            id="fnField"
+                            type="text"
+                            className="md-row"
+                            required={true}
+                            value={this.state.firstName}
+                            onChange={this.handleChangefirstName}
+                            errorText="First Name is required"
+                        />
+                        <TextField
+                            label="Last Name"
+                            id="lnField"
+                            type="text"
+                            className="md-row"
+                            required={true}
+                            value={this.state.lastName}
+                            onChange={this.handleChangelastName}
+                            errorText="Last Name is required"
+                        />
+                        <SelectionControlGroup
+                            id="selection-control-group-radio-gender"
+                            name="radio-gender"
+                            type="radio"
+                            className="md-row"
+                            label="Gender"
+                            defaultValue="Male"
+                            onChange={this.handleChangeGender}
+                            controls={[{
+                                label: 'Male',
+                                value: 'Male',
+                            }, {
+                                label: 'Female',
+                                value: 'Female',
+                            }]}
+                        />
+                        <TextField
+                            label="Age"
+                            id="agField"
+                            type="number"
+                            className="md-cell"
+                            required={true}
+                            value={this.state.age}
+                            onChange={this.handleChangeAge}
+                            errorText="Age is required"
+                        />
+                        <TextField
+                            label="Phone Number"
+                            id="pnField"
+                            type="text"
+                            className="md-cell"
+                            value={this.state.phoneNo}
+                            onChange={this.handleChangePhoneNumber}
+                        />
+                        <TextField
+                            label="Address Line"
+                            id="adField"
+                            type="text"
+                            className="md-row"
+                            required={true}
+                            value={this.state.addressline}
+                            onChange={this.handleChangeAddressLine}
+                            errorText="Address is required"
+                        />
+                        <TextField
+                            label="PostCode"
+                            id="pcField"
+                            type="number"
+                            className="md-cell"
+                            required={true}
+                            value={this.state.postcode}
+                            onChange={this.handleChangePostCode}
+                            errorText="PostCode is required"
+                        />
+                        <TextField
+                            label="City"
+                            id="ctField"
+                            type="text"
+                            className="md-cell"
+                            required={true}
+                            value={this.state.city}
+                            onChange={this.handleChangeCity}
+                            errorText="City is required"
+                        />
+                        <TextField
+                            label="Country"
+                            id="cyField"
+                            type="text"
+                            className="md-cell"
+                            required={true}
+                            value={this.state.country}
+                            onChange={this.handleChangeCountry}
+                            errorText="Last Name is required"
+                        />
 
-                <ControlLabel>First Name</ControlLabel>
-                <FormControl
-                  type="text"
-                  value={this.state.firstName}
-                  placeholder="Enter firstName"
-                  onChange={this.handleChangefirstName}
-                />
-                <FormControl.Feedback />
-              </FormGroup>
+                        <SelectionControl
+                            id="isDoctor"
+                            type="switch"
+                            label="Are you a Doctor?"
+                            name="doctorQ"
+                            onChange={this.handleChangeIsDoctor}
+                        />
 
-              <FormGroup
-                controlId="formBasicText"
-                validationState={this.getValidationState()}
-              >
-                <ControlLabel>Last Name</ControlLabel>
-                <FormControl
-                  type="text"
-                  value={this.state.lastName}
-                  placeholder="Enter lastName"
-                  onChange={this.handleChangelastName}
-                />
-                <FormControl.Feedback />
-              </FormGroup>
+                        <TextField
+                            label="Experience"
+                            id="exField"
+                            type="text"
+                            className="md-row"
+                            value={this.state.experience}
+                            onChange={this.handleChangeExperience}
+                        />
 
-              <FormGroup
-                controlId="formBasicText"
-                validationState={this.getValidationState()}
-              >
-                <ControlLabel>Age</ControlLabel>
-                <FormControl
-                  type="number"
-                  value={this.state.age}
-                  placeholder="Enter"
-                  onChange={this.handleChangeAge}
-                />
-                <FormControl.Feedback />
-              </FormGroup>
+                        <SelectField
+                            id="specialization"
+                            label="Specialization"
+                            placeholder="Specialization"
+                            className="md-row"
+                            menuItems={Specialization_ITEMS}
+                            onChange={this.handleChangeSpecialization}
+                            defaultValue="Dentist"
+                        />
 
-              <FormGroup
-                controlId="formBasicText"
-                validationState={this.getValidationState()}
-              >
-                <ControlLabel>Phone Number</ControlLabel>
-                <FormControl
-                  type="number"
-                  value={this.state.phoneNo}
-                  placeholder="Enter"
-                  onChange={this.handleChangePhone}
-                />
-                <FormControl.Feedback />
-              </FormGroup>
+                        <TextField
+                            label="Email"
+                            id="emailField"
+                            type="email"
+                            className="md-row"
+                            required={true}
+                            value={this.state.email}
+                            onChange={this.handleChangeEmail}
+                            errorText="Email is required"
+                        />
+                        <TextField
+                            label="Password"
+                            id="passwordField"
+                            type="password"
+                            className="md-row"
+                            required={true}
+                            value={this.state.password}
+                            onChange={this.handleChangePassword}
+                            errorText="Password is required"
+                        />
 
-              <FormGroup>
-                <ControlLabel>Select Langugaes you can speak</ControlLabel>
-                {"    "}
-                <Checkbox inline>English</Checkbox>{" "}
-                <Checkbox inline>German</Checkbox>{" "}
-                <Checkbox inline>Urdu</Checkbox>{" "}
-              </FormGroup>
-              <FormGroup>
-                <ControlLabel>Gender</ControlLabel>
-                {"    "}
-                <Radio name="Gender" inline>
-                  Male
-                </Radio>{" "}
-                <Radio name="Gender" inline>
-                  Female
-                </Radio>{" "}
-              </FormGroup>
-            </form>
-
-            <Button
-              id="submit"
-              type="submit"
-              disabled={
-                this.state.username == undefined ||
-                this.state.username == "" ||
-                this.state.password == undefined ||
-                this.state.password == ""
-                  ? true
-                  : false
-              }
-              raised
-              primary
-              className="md-cell md-cell--2"
-            >
-              Register
-            </Button>
-            <Button
-              id="reset"
-              type="reset"
-              raised
-              secondary
-              className="md-cell md-cell--2"
-            >
-              Dismiss
-            </Button>
-            <AlertMessage className="md-row md-full-width">
-              {this.props.error ? `${this.props.error}` : ""}
-            </AlertMessage>
-          </form>
-        </Card>
-      </Page>
-    );
-  }
+                        <Button
+                            id="submit"
+                            type="submit"
+                            disabled={this.shouldBeDisabled()}
+                            raised
+                            primary
+                            className="md-cell md-cell--2"
+                        >
+                            Register
+                        </Button>
+                        <Button
+                            id="reset"
+                            type="reset"
+                            raised
+                            secondary
+                            className="md-cell md-cell--2"
+                        >
+                            Dismiss
+                        </Button>
+                        <AlertMessage className="md-row md-full-width">
+                            {this.props.error ? `${this.props.error}` : ""}
+                        </AlertMessage>
+                    </form>
+                </Card>
+            </Page>
+        );
+    }
 }
 
 export default withRouter(UserSignup);

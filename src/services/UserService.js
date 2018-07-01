@@ -12,8 +12,9 @@ export default class UserService {
     static register(user, pass) {
         return new Promise((resolve, reject) => {
             HttpService.post(`${UserService.baseURL()}/register`, {
-                username: user,
-                password: pass
+                email: user.email,
+                password: user.password,
+                profileData: user.profileData
             }, function(data) {
                 resolve(data);
             }, function(textStatus) {
