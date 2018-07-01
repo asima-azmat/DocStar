@@ -4,6 +4,7 @@ import React from 'react';
 
 import HomePage from '../components/HomePage';
 import Header from '../components/HeaderNav';
+import {Footer} from '../components/Footer'
 
 import DoctorService from '../services/DoctorService';
 import FeedService from '../services/FeedService'
@@ -57,6 +58,7 @@ export class HomePageView extends React.Component
             <div>
                 <Header/>
                 <HomePage fDoctor={this.state.fDoctor} fBlog={this.state.fBlog}/>
+                <Footer/>
             </div>
         );
     }
