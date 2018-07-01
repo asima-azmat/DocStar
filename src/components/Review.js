@@ -4,7 +4,6 @@ import {Star} from "react-rater";
 import { withRouter} from 'react-router-dom';
 
 class Review extends Component {
-    Summary;
     Detail;
 
     render() {
@@ -13,7 +12,6 @@ class Review extends Component {
             <div className="container" style={{margin:'10px'}}>
                 <div className="row border border-primary">
                     <div className="col-md-6">
-                        <h5 id = "ReviewSummary"><b>{this.props.Summary}</b></h5>
                         <h5 id = "ReviewDetail">{this.props.Detail}</h5>
                     </div>
                     <div className="col-md-2">
