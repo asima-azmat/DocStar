@@ -12,6 +12,7 @@ import FormControl from "react-bootstrap/es/FormControl";
 import Row from "react-bootstrap/es/Row";
 import { withRouter} from 'react-router-dom';
 import './../assets/css/Profile.css';
+import Button from "react-bootstrap/es/Button";
 
 class Profile extends Component {
 
@@ -58,7 +59,7 @@ function ItemList (props) {
         <div className="row">
             <div className="col-md-6 col-md-offset-2">
                 <h1>{Profile.giveDoctorName(props.doctor)}</h1>
-                <h6>{props.doctor.doctorParams.qualification}, {props.doctor.doctorParams.experience}</h6>
+                <h6>{props.doctor.doctorParams.experience}</h6>
                 <h6>Address: {props.doctor.address}</h6>
                 <h6>Phone No: {props.doctor.phoneNo}</h6>
                 <h6>Languages: {Profile.getLanguage(props.doctor)}</h6>
@@ -107,8 +108,8 @@ function TabView () {
                         <FormControl componentClass="textarea" placeholder="Explain in detail why you want to setup an appointment." />
                     </Row>
                 </FormGroup>
-                {/*<Button className="ButtonWidth btn btn-primary" bsStyle="primary" type="submit">Request Appointment</Button>*/}
-                <button className="btn btn-primary" type="submit">Request Appointment</button>
+                <Button className="ButtonWidth btn btn-primary" bsStyle="primary" type="submit">Request Appointment</Button>
+                {/*<button className="btn btn-primary" type="submit">Request Appointment</button>*/}
 
             </form>
         </TabContent>
