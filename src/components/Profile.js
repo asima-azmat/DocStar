@@ -5,6 +5,7 @@ import Tab from "react-bootstrap/es/Tab";
 import TabContent from "react-bootstrap/es/TabContent";
 import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
+import AddReview from './AddReview';
 import FormGroup from "react-bootstrap/es/FormGroup";
 import ControlLabel from "react-bootstrap/es/ControlLabel";
 import FormControl from "react-bootstrap/es/FormControl";
