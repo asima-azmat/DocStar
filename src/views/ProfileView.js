@@ -45,7 +45,7 @@ export class ProfileView extends React.Component
             <div>
                 <Header/>
                 <Profile doctor={this.state.doctor}/>
-                <Profile/>
+                <Footer/>
             </div>
         );0
     }

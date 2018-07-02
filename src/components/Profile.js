@@ -44,7 +44,7 @@ class Profile extends Component {
     }
 
     render() {
-
+        console.log(this.props);
         return (
             <div>
                 <ItemList doctor = {this.props.doctor} />
@@ -60,10 +60,10 @@ function ItemList (props) {
             <div className="col-md-6 col-md-offset-2">
                 <h1>{Profile.giveDoctorName(props.doctor)}</h1>
                 <h6>{props.doctor.doctorParams.experience}</h6>
-                <h6>Address: {props.doctor.address}</h6>
+                <h6>Address: {props.doctor.address.addressline}</h6>
                 <h6>Phone No: {props.doctor.phoneNo}</h6>
                 <h6>Languages: {Profile.getLanguage(props.doctor)}</h6>
-                <h6><b>Opening Hours: {Profile.getOpeningHours(props.doctor)}</b></h6>
+                {/*<h6><b>Opening Hours: {Profile.getOpeningHours(props.doctor)}</b></h6>*/}
             </div>
             <div className="col-md-2" style={{marginTop: 3 + 'em'}}>
                 <Rater total={5} rating={4} interactive={false}/>
