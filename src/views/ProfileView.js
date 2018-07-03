@@ -8,6 +8,7 @@ import {Footer} from '../components/Footer'
 
 import './../assets/css/medium.css';
 import DoctorService from "../services/DoctorService";
+import UserService from "../services/UserService";
 
 
 export class ProfileView extends React.Component
@@ -27,20 +28,20 @@ export class ProfileView extends React.Component
 
         DoctorService.getDoctor(id).then((data) => {
             this.setState({
+                user: UserService.isAuthenticated() ? UserService.getCurrentUser() : undefined,
                 doctor: data,
                 loading: false
             });
         }).catch((e) => {
             console.error(e);
         });
+    }
 
-        DoctorService.addReview(id).then((data)=>{
-            this.setState({
-                review: data,
-                loading: false
-            });
+    addReview(rating,reviewStatement) {
+        DoctorService.addReview(rating,reviewStatement).then((data) => {
+            window.location.reload();
         }).catch((e) => {
-            console.error(e);
+            this.setState(Object.assign({}, this.state, {error: 'Error while adding review'}));
         });
     }
 
@@ -53,7 +54,7 @@ export class ProfileView extends React.Component
         return (
             <div>
                 <Header/>
-                <Profile doctor={this.state.doctor}/>
+                <Profile doctor={this.state.doctor} user={this.state.user} addReview={(rating,reviewStatement) => this.addReview(rating,reviewStatement)}/>
                 <Footer/>
             </div>
         );0

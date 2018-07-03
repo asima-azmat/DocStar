@@ -27,6 +27,7 @@ class AddReview extends React.Component {
     }
 
     handleChangeDetail(value) {
+        console.log(value);
         this.setState(Object.assign({}, this.state, {detail: value}));
     }
 

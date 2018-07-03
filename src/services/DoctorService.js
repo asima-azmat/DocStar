@@ -52,10 +52,11 @@ export default class DoctorService
         });
     }
 
-    static addReview(id) {
+    static addReview(rating,reviewStatement) {
         return new Promise((resolve, reject) => {
             HttpService.post(`${DoctorService.baseURL()}/${id}/review`, {
-                reviewData:id.reviewData
+                rating: rating,
+                reviewStatement: reviewStatement
             }, function(data) {
                     resolve(data);
             }, function(textStatus) {
