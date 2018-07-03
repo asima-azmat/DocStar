@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Review from './Review';
 import Tabs from "react-bootstrap/es/Tabs";
 import Tab from "react-bootstrap/es/Tab";
 import TabContent from "react-bootstrap/es/TabContent";
-import Rater from 'react-rater'
+import Rater, {Star} from 'react-rater'
 import 'react-rater/lib/react-rater.css'
 import AddReview from './AddReview';
 import FormGroup from "react-bootstrap/es/FormGroup";
@@ -37,18 +36,18 @@ class Profile extends Component {
         return lang;
     }
 
-    static getOpeningHours(doctor){
-        const openingHours = doctor.doctorParams.openingHours;
-        const hrs = openingHours.map((openingHour) => openingHour + ', ');
-        return hrs;
-    }
+    // static getOpeningHours(doctor){
+    //     const openingHours = doctor.doctorParams.openingHours;
+    //     const hrs = openingHours.map((openingHour) => openingHour + ', ');
+    //     return hrs;
+    // }
 
     render() {
         console.log(this.props);
         return (
             <div>
                 <ItemList doctor = {this.props.doctor} />
-                <TabView items = {this.props}/>
+                <TabView items = {this.props.reviewData}/>
             </div>
         );
     }
@@ -79,8 +78,18 @@ function TabView () {
         <Tabs bsStyle="tabs">
             <Tab eventKey={1} title="Reviews">
                 <TabContent>
-                    <Review Summary = "Excellent Doctor" Detail = "I have visited this doctor and found their services to be very satisfactory.">
-                    </Review>
+                    <div className="container" style={{margin:'10px'}}>
+                        <div className="row border border-primary">
+                            <div className="col-md-6">
+                                <h5 id = "ReviewDetail">Review</h5>
+                            </div>
+                            <div className="col-md-2">
+                                <Rater total={5}>
+                                    <Star className = "react-rater-star-individual"/>
+                                </Rater>
+                            </div>
+                        </div>
+                    </div>
                 </TabContent>
             </Tab>
             <Tab eventKey={2} title="Provide Review">
