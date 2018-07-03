@@ -79,7 +79,7 @@ function TabView () {
         <Tabs bsStyle="tabs">
             <Tab eventKey={1} title="Reviews">
                 <TabContent>
-                    <Review Summary = "Excellent Doctor" Detail = "I have visited Dr Aaron and found his services to be very satisfactory.">
+                    <Review Summary = "Excellent Doctor" Detail = "I have visited this doctor and found their services to be very satisfactory.">
                     </Review>
                 </TabContent>
             </Tab>
