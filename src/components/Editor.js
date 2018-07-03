@@ -126,7 +126,7 @@ class Editor extends Component
                                     <textarea col="1" className="editor-title" id="editor-title" placeholder="Title"></textarea>
                                 </div>
                                 <div className="form-group">
-                                    <textarea id="medium-editable" className="medium-editable" ></textarea>
+                                    <textarea id="medium-editable" className="medium-editable"></textarea>
                                 </div>
                             </form>
                         </div>

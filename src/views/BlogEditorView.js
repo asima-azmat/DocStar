@@ -64,7 +64,7 @@ export class BlogEditorView extends React.Component {
     updateBlog(blog) {
         if(this.state.blog === undefined) {
             FeedService.createBlog(blog).then((data) => {
-                this.props.history.push('/');
+                this.props.history.push('/blog');
             }).catch((e) => {
                 console.error(e);
                 this.setState(Object.assign({}, this.state, {error: 'Error while creating blog'}));

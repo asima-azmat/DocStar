@@ -41,7 +41,7 @@ class HomePage extends Component {
                             <input
                                 id="searchBox"
                                 className="centeredSearch"
-                                placeholder="Search Doctors by Name, Specialization or Area"
+                                placeholder="Search for Doctors"
                             />
                         </form>
                     </div>

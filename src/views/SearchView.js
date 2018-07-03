@@ -4,11 +4,13 @@ import {
   CategorySearch,
   SingleRange,
   ResultCard,
-  RangeSlider
+  RangeSlider,
+    SingleList
 } from "@appbaseio/reactivesearch";
 import { Link } from "react-router-dom";
 import {Footer} from '../components/Footer';
 import Header from '../components/HeaderNav';
+import Rater from 'react-rater'
 
 //import './../assets/css/SearchView.css'
 
@@ -49,8 +51,8 @@ export default class SearchView extends Component {
       <div className="container">
       <Header/>
         <ReactiveBase
-          app="docsearch"
-          credentials="0cchhVQ1S:c86f3050-ffeb-493d-b540-ccea2b52ccc1"
+          app="DocSearchBlog"
+          credentials="5sgqwdXSN:bfe7ee53-4eee-4f12-b729-96dd299670c7"
         >
           <div style={{ display: "flex", flexDirection: "row" }}>
             <div
@@ -68,15 +70,25 @@ export default class SearchView extends Component {
                 }}
               />
 
-              <SingleRange
+                <div style={{display: "none"}}>
+                <SingleList
+                    componentId="doctorSensor"
+                    dataField="isDoctor"
+                    defaultSelected={true}
+                    title="Doctors"
+                />
+                </div>
+
+                <SingleRange
                 componentId="ratingsfilter"
                 title="Filter by ratings"
-                dataField="age"
+                dataField="doctorParams.reviews.rating"
                 data={[
                   { start: "4", end: "5", label: "4 stars and up" },
                   { start: "3", end: "5", label: "3 stars and up" },
                   { start: "2", end: "5", label: "2 stars and up" },
-                  { start: "1", end: "5", label: "see all ratings" }
+                    { start: "1", end: "5", label: "1 star and up" },
+                  { start: "0", end: "5", label: "see all ratings" }
                 ]}
                 defaultSelected="see all ratings"
                 style={{
@@ -92,35 +104,38 @@ export default class SearchView extends Component {
 
               <MultiDropdownList
                 componentId="CitySensor"
-                dataField="addres.city.keyword"
+                dataField="address.city.keyword"
                 title="Cities"
                 style={{
                   padding: "5px",
                   marginTop: "40px",
                   marginRight: "50px"
                 }}
+                showCount={false}
               />
 
               <MultiDropdownList
                 componentId="PostCode"
-                dataField="addres.postcode.keyword"
+                dataField="address.postcode"
                 title="Post Code"
                 style={{
                   padding: "5px",
                   marginTop: "40px",
                   marginRight: "50px"
                 }}
+                showCount={false}
               />
 
               <MultiDropdownList
                 componentId="Country"
-                dataField="addres.country.keyword"
+                dataField="address.country.keyword"
                 title="Country"
                 style={{
                   padding: "5px",
                   marginTop: "40px",
                   marginRight: "50px"
                 }}
+                showCount={false}
               />
 
               <MultiDropdownList
@@ -132,6 +147,7 @@ export default class SearchView extends Component {
                   marginTop: "40px",
                   marginRight: "50px"
                 }}
+                showCount={false}
               />
 
               <SingleDropdownList
@@ -143,6 +159,7 @@ export default class SearchView extends Component {
                   marginTop: "40px",
                   marginRight: "50px"
                 }}
+                showCount={false}
               />
 
 
@@ -154,12 +171,13 @@ export default class SearchView extends Component {
                 and: [
                   "namesearchbox",
                   "Category_Profile",
-                  "ratingsfilter",
+                    "ratingsfilter",
                   "Languages",
                   "PostCode",
                   "Country",
                   "CitySensor",
-                  "Specialization"
+                  "Specialization",
+                    "doctorSensor"
                 ]
               }}
               pagination={true}
@@ -176,8 +194,9 @@ export default class SearchView extends Component {
                 image: `https://ui-avatars.com/api/?background=0D8ABC&color=fff&size=160&name=${res.firstName}+${res.lastName}`,
                 description: (
                   <div style={{ lineHeight: "18px" }}>
-                    <h4>{res.address}</h4>
-                    <h3>{res.doctorParams.q}</h3> {"★".repeat(res.age)}
+                    <h4>{res.address.addressline}</h4>
+                    <h3>{res.doctorParams.specialization}</h3>
+                      <p><Rater total={5} rating={res.doctorParams.reviews.rating} interactive={false}/></p>
                   </div>
                 )
               })}

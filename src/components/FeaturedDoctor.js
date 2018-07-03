@@ -15,18 +15,21 @@ class FeaturedDoctor extends Component
         return doctor.firstName+' '+doctor.lastName;
     }
 
+    static getAddress(address)
+    {
+        return address.addressline+', '+address.city;
+    }
+
     render()
     {
         const fDoctor = this.props.fDoctor;
         return (
             <Card>
-                <CardTitle title={FeaturedDoctor.getDoctorName(fDoctor)} subtitle={fDoctor.doctorParams.qualification} avatar={<Avatar random>{fDoctor.firstName.substr(0,1)}</Avatar>}/>
+                <CardTitle title={FeaturedDoctor.getDoctorName(fDoctor)} subtitle={fDoctor.doctorParams.specialization} avatar={<Avatar random>{fDoctor.firstName.substr(0,1)}</Avatar>}/>
                 <CardText>
                     <Rater total={5} rating={fDoctor.doctorParams.reviews.rating} interactive={false}/>
-                    <p>
-                        The <code>CardText</code> component is really just useful for displaying any
-                        content with some additional padding.
-                    </p>
+                    <p>Experience: {fDoctor.doctorParams.experience}</p>
+                    <p>Address: {FeaturedDoctor.getAddress(fDoctor.address)}</p>
                     <Link to={`/doctor/${fDoctor._id}`}>View Full Profile</Link>
                 </CardText>
             </Card>

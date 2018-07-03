@@ -28,6 +28,7 @@ export default class App extends React.Component
                 { component: FeedView , path: '/blog', exact: true},
                 { component: SearchView, path: '/search', exact: true},
                 { component: ProfileView , path: '/doctor/:id', exact: true},
+                { component: ProfileView , path: '/patient/:id', exact: true},
                 { render: (props) => {
                     if(UserService.isAuthenticated()) {
                         if (UserService.getCurrentUser().isDoctor) {

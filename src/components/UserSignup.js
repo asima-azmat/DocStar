@@ -118,6 +118,7 @@ class UserSignup extends React.Component {
     }
 
     handleSubmit(event) {
+        event.preventDefault();
         const user = {
             email: this.state.email,
             password: this.state.password,
@@ -301,6 +302,7 @@ class UserSignup extends React.Component {
                             menuItems={Specialization_ITEMS}
                             onChange={this.handleChangeSpecialization}
                             defaultValue="Dentist"
+                            value={this.state.specialization}
                         />
 
                         <TextField

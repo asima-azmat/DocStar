@@ -27,7 +27,6 @@ export class UserSignupView extends React.Component {
 
     render() {
         return (
-
             <UserSignup onSubmit={(user) => this.signup(user)} error={this.state.error}></UserSignup>
         );
     }
