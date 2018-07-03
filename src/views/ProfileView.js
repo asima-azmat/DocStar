@@ -36,7 +36,7 @@ export class ProfileView extends React.Component
 
         DoctorService.addReview(id).then((data)=>{
             this.setState({
-                review: data,
+                reviewData: data,
                 loading: false
             });
         }).catch((e) => {
