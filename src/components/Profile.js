@@ -76,8 +76,18 @@ function TabView (props) {
                 <Tabs bsStyle="tabs">
                     <Tab eventKey={1} title="Reviews">
                         <TabContent>
-                            <Review Summary = "Excellent Doctor" Detail = "I have visited this doctor and found their services to be very satisfactory.">
-                            </Review>
+                            <div className="container" style={{margin:'10px'}}>
+                                <div className="row border border-primary">
+                                    <div className="col-md-6">
+                                        <h5 id = "ReviewDetail">I have visited this doctor and found their services to be very satisfactory.</h5>
+                                    </div>
+                                    <div className="col-md-2">
+                                        <Rater total={5}>
+                                            <Star className = "react-rater-star-individual"/>
+                                        </Rater>
+                                    </div>
+                                </div>
+                            </div>
                         </TabContent>
                     </Tab>
                     {props.user && props.user.id==props.docId ? [
