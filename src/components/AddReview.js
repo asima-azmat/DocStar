@@ -17,7 +17,7 @@ class AddReview extends React.Component {
         super(props);
 
         this.state = {
-            detail : '',
+            reviewStat : '',
             rating : ''
         };
 
@@ -27,14 +27,13 @@ class AddReview extends React.Component {
     }
 
     handleChangeDetail(value) {
-        console.log(value);
-        this.setState(Object.assign({}, this.state, {detail: value}));
+        this.setState(Object.assign({}, this.state, {reviewStat: value}));
     }
 
     handleSubmit(event) {
         const user = {
-            reviewData: {
-                detail: this.state.detail,
+            reviewDat: {
+                reviewStat: this.state.reviewStat,
                 rating: this.state.rating
             }
         }

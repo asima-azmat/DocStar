@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Review from './Review';
 import Tabs from "react-bootstrap/es/Tabs";
 import Tab from "react-bootstrap/es/Tab";
 import TabContent from "react-bootstrap/es/TabContent";
-import Rater from 'react-rater'
+import Rater, {Star} from 'react-rater'
 import 'react-rater/lib/react-rater.css'
 import AddReview from './AddReview';
 import FormGroup from "react-bootstrap/es/FormGroup";
@@ -37,12 +36,6 @@ class Profile extends Component {
         return lang;
     }
 
-    static getOpeningHours(doctor){
-        const openingHours = doctor.doctorParams.openingHours;
-        const hrs = openingHours.map((openingHour) => openingHour + ', ');
-        return hrs;
-    }
-
     render() {
         console.log(this.props);
         return (
@@ -67,7 +60,6 @@ function ItemList (props) {
                 <h6>Address: {props.doctor.address.addressline}</h6>
                 <h6>Phone No: {props.doctor.phoneNo}</h6>
                 {/*<h6>Languages: {Profile.getLanguage(props.doctor)}</h6>*/}
-                {/*<h6><b>Opening Hours: {Profile.getOpeningHours(props.doctor)}</b></h6>*/}
             </div>
             {props.doctor.isDoctor ? [
             <div className="col-md-2" style={{marginTop: 3 + 'em'}}>
@@ -116,7 +108,6 @@ function TabView (props) {
                                 </FormGroup>
                                 <Button className="ButtonWidth btn btn-primary" bsStyle="primary" type="submit" disabled={true}>Request Appointment</Button>
                                 {/*<button className="btn btn-primary" type="submit">Request Appointment</button>*/}
-
                             </form>
                         </TabContent>
                     </Tab>] : [<div/>]}
