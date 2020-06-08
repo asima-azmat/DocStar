@@ -18,15 +18,6 @@ You need git to clone the [sebamaster-docstar-frontend](https://github.com/asima
 
 We also use a number of node.js tools to initialize and test [sebamaster-docstar-frontend](https://github.com/asima-azmat/DocStar) . You must have node.js and its package manager (npm) installed.  You can get them from [http://nodejs.org/](http://nodejs.org/).
 
-### Clone Movie Project
-
-Clone the [sebamaster-docstar-frontend](https://github.com/asima-azmat/DocStar)  repository using [git](http://git-scm.com/):
-
-```
-git clone https://github.com/asima-azmat/DocStar.git
-cd DocStar
-```
-
 ### Install Dependencies
 
 We get the tools we depend upon via `npm`, the [node package manager](https://www.npmjs.com).
